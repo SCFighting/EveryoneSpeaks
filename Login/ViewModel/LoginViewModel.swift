@@ -6,28 +6,38 @@
 //
 import RxSwift
 import RxCocoa
+import Moya
 final class LoginViewModel: ViewModelType
 {
     struct Input {
-        let wechatLogin: AnyObserver<Void>
-        
+        let login: AnyObserver<MoyaProvider<Service>>
     }
     struct Output {
-        let wechatLoginResult: Driver<String>
+        let loginResult: Observable<String>
     }
+    
+    private let loginSubject = ReplaySubject<MoyaProvider<Service>>.create(bufferSize: 1)
     
     let input: Input
     let output: Output
-    private let wechatLoginSubject = PublishSubject<Void>()
-
-    init()
-    {
-        
-        let result = wechatLoginSubject.map { () in
-            return "ss"
-        }.asDriver(onErrorJustReturn: "error")
-        self.output = Output(wechatLoginResult: result)
-        self.input = Input(wechatLogin: wechatLoginSubject.asObserver())
+  
+    init() {
+//        loginSubject.ma
+        let str = loginSubject.map { provider in
+            var message = "Couldn't access API"
+            provider.request(.login) { result in
+                
+                if case let .success(response) = result
+                {
+                    let jsonString = try? response.mapString()
+                    message = jsonString ?? message
+                }
+                
+            }
+            return message
+        }
+        self.output = Output(loginResult: str)
+        self.input = Input(login: loginSubject.asObserver())
     }
     
 }

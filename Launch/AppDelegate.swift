@@ -24,6 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         {
             return true
         }
+//        let cc = MoyaProvider
+        let json = [
+                    "name": "KakaJSON",
+                    "url": "https://github.com/kakaopensource/KakaJSON"
+                ]
+        
         window = UIWindow(frame: .init(x: 0, y: 0, width:LayoutConstantConfig.screenWidth , height: LayoutConstantConfig.screenHeight))
         Navigator.shared.initRootController(for: window)
         return true

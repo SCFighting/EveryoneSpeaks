@@ -7,7 +7,7 @@ target 'EveryoneSpeaks' do
 
   pod 'HandyJSON'
   pod 'SnapKit'
-  pod 'Alamofire'
+  pod 'KakaJSON', '~> 1.1.2' 
   pod 'CocoaLumberjack/Swift'
   pod 'Moya/RxSwift', '~> 15.0'
   pod 'RxSwift', '6.5.0'
