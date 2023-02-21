@@ -5,7 +5,6 @@ target 'EveryoneSpeaks' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'HandyJSON'
   pod 'SnapKit'
   pod 'KakaJSON', '~> 1.1.2' 
   pod 'CocoaLumberjack/Swift'
@@ -18,7 +17,7 @@ target 'EveryoneSpeaks' do
   pod 'ActiveLabel'
   pod 'RAMAnimatedTabBarController'
   pod 'RTRootNavigationController'
-  
+  pod 'RxKakaJSON', :git => 'git@github.com:SCFighting/RxKakaJSON.git'
   pod 'WechatOpenSDK'
   post_install do |installer|
     installer.pods_project.build_configurations.each do |config|

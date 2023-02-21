@@ -14,6 +14,10 @@ enum Service {
 
 extension Service: TargetType
 {
+    var sampleData: Data {
+        return Data()
+    }
+    
     var baseURL: URL {
         URL(string: "https://renrenjiang.cn")!
     }
