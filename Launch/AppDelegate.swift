@@ -24,15 +24,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         {
             return true
         }
-//        let cc = MoyaProvider
-        let json = [
-                    "name": "KakaJSON",
-                    "url": "https://github.com/kakaopensource/KakaJSON"
-                ]
-        
         window = UIWindow(frame: .init(x: 0, y: 0, width:LayoutConstantConfig.screenWidth , height: LayoutConstantConfig.screenHeight))
         Navigator.shared.initRootController(for: window)
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return  LibManager.shared.application(app, open: url,options: options)
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        return LibManager.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
     }
 }
 
@@ -40,7 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate
 {
     // MARK: UISceneSession Lifecycle
-
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.

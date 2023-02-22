@@ -9,31 +9,31 @@ import Foundation
 import Moya
 
 enum Service {
-    case login
+    case wechatLogin(appid: String,secret: String,code: String,grant_type: String)
 }
 
 extension Service: TargetType
 {
-    var sampleData: Data {
-        return Data()
-    }
-    
     var baseURL: URL {
-        URL(string: "https://renrenjiang.cn")!
+        switch self
+        {
+        case .wechatLogin(_, _, _, _):
+            return URL(string: "https://api.weixin.qq.com")!
+        }
     }
     
     var path: String {
         switch self
         {
-        case .login:
-            return "/api/v3/system/promotion/banner"
+        case .wechatLogin(_, _, _, _):
+            return "/sns/oauth2/access_token"
         }
     }
     
     var method: Moya.Method {
         switch self
         {
-        case .login:
+        case .wechatLogin(_, _ , _ , _):
             return .get
         }
     }
@@ -41,8 +41,8 @@ extension Service: TargetType
     var task: Moya.Task {
         switch self
         {
-        case .login:
-            return .requestPlain
+        case .wechatLogin(let appid, let secret, let code, let grant_type):
+            return .requestParameters(parameters: ["appid":appid,"secret":secret,"code":code,"grant_type":grant_type], encoding: URLEncoding.queryString)
         }
     }
     

@@ -29,16 +29,21 @@ class LoginController: BaseController {
 //        },onDisposed: {}).disposed(by: dispos)
         // Do any additional setup after loading the view.
 //\
-        Observable<MoyaProvider<Service>>.create { ttt in
-            ttt.onNext(self.pp)
-            ttt.onCompleted()
-            return Disposables.create()
-        }.bind(to: vm.input.login).disposed(by: dispos)
-        vm.output.loginResult.subscribe { str in
-            print("str = \(str)")
-        }.disposed(by: dispos)
+//        Observable<MoyaProvider<Service>>.create { ttt in
+//            ttt.onNext(self.pp)
+//            ttt.onCompleted()
+//            return Disposables.create()
+//        }.bind(to: vm.input.login).disposed(by: dispos)
+//        vm.output.loginResult.subscribe { str in
+//            print("str = \(str)")
+//        }.disposed(by: dispos)
+//        
         
-        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        vm.sendWxAuthRequest()
     }
     
 

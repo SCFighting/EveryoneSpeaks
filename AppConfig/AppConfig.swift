@@ -65,9 +65,22 @@ struct LayoutConstantConfig
     }
 }
 
+
+/// 用户信息常量
 struct UserInfoConstantConfig {
     /// token对应的key
     static let token = "token"
     /// deadLine对应的key
     static let tokenDeadLine = "deadLine"
+}
+
+/// 第三方库授权常量
+struct AuthorConstConfig
+{
+    
+    /// 微信平台appid
+    static let wxAppid = "wxf2f15e0298ede2f9"
+    static let wxsecret = "13d141773bab3ad7d74fc5fc5e764283"
+    ///  微信开发者Universal Link
+    static let wxUniversalLink = "https://apple.renrenjiang.cn/"
 }

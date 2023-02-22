@@ -18,6 +18,7 @@ class Navigator: NSObject {
         guard let window else {
             return
         }
+        LibManager.shared.initThirdPardLibrary(window: window)
         avtivityWindow = window
         // 已登录
         if let token = UserDefaults.standard.object(forKey: UserInfoConstantConfig.token) as? String, !token.isEmpty, UserDefaults.standard.integer(forKey: UserInfoConstantConfig.tokenDeadLine) > Int(NSDate().timeIntervalSince1970)
