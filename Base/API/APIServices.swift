@@ -11,7 +11,7 @@ import Moya
 enum Service {
     //MARK: -- 登录相关API
     /// 微信平台获取access_token
-    case wechatAccessToken(appid: String,secret: String,code: String,grant_type: String)
+    case wechatAccessToken(appid: String, secret: String, code: String, grant_type: String)
     /// 微信平台获取用户信息
     case wechatUserInfo(accessToken: String, openid: String)
     /// 三方平台授权登录
@@ -23,9 +23,9 @@ extension Service: TargetType
     var baseURL: URL {
         switch self
         {
-        case .wechatAccessToken(_, _, _, _),.wechatUserInfo(accessToken: _ , openid: _ ):
+        case .wechatAccessToken(_, _, _, _), .wechatUserInfo(accessToken: _ , openid: _ ):
             return URL(string: "https://api.weixin.qq.com")!
-        case .authLogin(_, nickname: _, uuid: _, openid: _, accessToken: _):
+        case .authLogin(app: _, nickname: _, uuid: _, openid: _, accessToken: _):
             return URL(string: "https://api.renrenjiang.cn")!
         }
     }
@@ -33,9 +33,11 @@ extension Service: TargetType
     var path: String {
         switch self
         {
-        case .wechatAccessToken(_, _, _, _),.wechatUserInfo(accessToken: _ , openid: _ ):
+        case .wechatAccessToken(_, _, _, _):
             return "/sns/oauth2/access_token"
-        case .authLogin(app: _, nickname: _, uuid: _, openid: _, accessToken: _):
+        case .wechatUserInfo(accessToken: _ , openid: _ ):
+            return "/sns/userinfo"
+        case .authLogin(app: _, nickname: _, uuid: _, openid: _, accessToken: _ ):
             return "/api/v3/account/apple/auth"
         }
     }
@@ -43,7 +45,7 @@ extension Service: TargetType
     var method: Moya.Method {
         switch self
         {
-        case .wechatAccessToken(_, _ , _ , _),.wechatUserInfo(accessToken: _ , openid: _ ):
+        case .wechatAccessToken(_, _ , _ , _), .wechatUserInfo(accessToken: _ , openid: _ ):
             return .get
         case .authLogin(app: _, nickname: _, uuid: _, openid: _, accessToken: _):
             return .post
@@ -57,7 +59,7 @@ extension Service: TargetType
             return .requestParameters(parameters: ["appid":appid,"secret":secret,"code":code,"grant_type":grant_type], encoding: URLEncoding.queryString)
             
         case .wechatUserInfo(let accessToken , let openid):
-            return .requestParameters(parameters: ["access_token":accessToken, "openid":openid], encoding: JSONEncoding.default)
+            return .requestParameters(parameters: ["access_token":accessToken, "openid":openid], encoding: URLEncoding.queryString)
             
         case let .authLogin(app, nickname, uuid, openid, accessToken):
             var parameters = [String:Any]()
