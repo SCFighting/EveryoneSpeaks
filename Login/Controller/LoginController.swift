@@ -11,7 +11,7 @@ import RxCocoa
 import Moya
 class LoginController: BaseController {
 
-    let vm = LoginViewModel()
+    let vm = LoginViewModel(input: LoginViewModel.Input(), output: LoginViewModel.Output())
     let dispos = DisposeBag()
     let pp = MoyaProvider<Service>()
     let btn = UIButton(frame: .init(x: 0, y: 0, width: LayoutConstantConfig.screenWidth, height: LayoutConstantConfig.screenHeight))

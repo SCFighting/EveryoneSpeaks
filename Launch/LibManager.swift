@@ -52,7 +52,7 @@ extension LibManager: WXApiDelegate
         print("微信回调消息=\(resp)")
         if let authResp = resp as? SendAuthResp
         {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "SendAuthResp"), object: authResp)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "SendAuthResp"), object: authResp.code)
         }
     }
     
