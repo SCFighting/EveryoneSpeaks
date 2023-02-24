@@ -98,6 +98,7 @@ final class LoginViewModel: ViewModelType
         WXApi.send(req)
     }
     
+    
 //    func queryWechatAccessToken(code: String)
 //    {
 //        let provider = MoyaProvider<Service>()

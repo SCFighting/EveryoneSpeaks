@@ -13,7 +13,7 @@ target 'EveryoneSpeaks' do
   pod 'RxCocoa', '6.5.0'
   pod 'UIColor_Hex_Swift'
   pod 'CodeTextField', '~> 0.4.0'
-  pod 'ProgressHUD'
+  pod 'Toast-Swift', '~> 5.0.1'
   pod 'ActiveLabel'
   pod 'RAMAnimatedTabBarController'
   pod 'RTRootNavigationController'

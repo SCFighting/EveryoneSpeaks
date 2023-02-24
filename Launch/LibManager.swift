@@ -6,7 +6,8 @@
 //
 
 import Foundation
-
+import Toast_Swift
+import CocoaLumberjack
 
 /// 三方库管理
 class LibManager: NSObject {
@@ -15,8 +16,18 @@ class LibManager: NSObject {
     /// - Parameter window: window
     func initThirdPardLibrary(window: UIWindow?)
     {
+        /// 初始化日志
+        DDOSLogger.sharedInstance.logFormatter = CustomLogFormatter()
+        DDLog.add(DDOSLogger.sharedInstance)
+        let fileLogger: DDFileLogger = DDFileLogger()
+        fileLogger.logFormatter = CustomLogFormatter()
+        fileLogger.rollingFrequency = 7 * 60 * 60 * 24 
+        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
+        DDLog.add(fileLogger)
+        
         /// 初始化微信SDK
         WXApi.registerApp(AuthorConstConfig.wxAppid, universalLink: AuthorConstConfig.wxUniversalLink)
+        
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -49,10 +60,35 @@ extension LibManager: WXApiDelegate
 {
     
     func onResp(_ resp: BaseResp) {
-        print("微信回调消息=\(resp)")
+        DDLogDebug("微信回调消息=\(resp)")
         if let authResp = resp as? SendAuthResp
         {
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "SendAuthResp"), object: authResp.code)
+            if authResp.errCode == 0
+            {
+                if let code = authResp.code
+                {
+                    DDLogDebug("用户同意微信授权,code = \(code)")
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "SendAuthResp"), object: code)
+                }
+                else
+                {
+                    DDLogError("用户同意微信授权,但未获取到code")
+                    let error = CustomError.baseError(errorCode: nil, errorMessage: "用户同意微信授权,但未获取到code")
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "SendAuthResp"), object: error)
+                }
+            }
+            else if authResp.errCode == -4 //用户拒绝授权
+            {
+                DDLogError("用户拒绝微信授权")
+                let error = CustomError.baseError(errorCode: -4, errorMessage: "用户拒绝授权")
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "SendAuthResp"), object: error)
+            }
+            else if authResp.errCode == -2 //用户取消
+            {
+                DDLogError("用户取消微信授权")
+                let error = CustomError.baseError(errorCode: -2, errorMessage: "用户取消授权")
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "SendAuthResp"), object: error)
+            }
         }
     }
     
