@@ -31,7 +31,7 @@ final class LoginViewModel: ViewModelType
     /// 私有属性用于内部初始化
     private let wechatLoginSubject = PublishSubject<Void>()
     /// 网络请求
-//    let provider = MoyaProvider<Service>();
+    //    let provider = MoyaProvider<Service>();
     /// 微信平台获取到的access_token
     var access_token:String?
     
@@ -70,13 +70,22 @@ final class LoginViewModel: ViewModelType
             {
                 throw(CustomError.baseError(errorCode: nil, errorMessage: "微信获取用户信息失败"))
             }
-            DDLogDebug(Self.accessModel.headimgurl)
             return Self.accessModel
-        })
-            
-            
-            .map({_ -> Bool in
-            return true
+        }).flatMapLatest({model -> Single<Response> in
+            return provider.rx.request(.authLogin(app: "wechat", nickname: model.nickname, uuid: model.unionid, openid: model.openid, accessToken: model.access_token))
+        }).map({response throws -> Bool in
+            if let userModel = response.data.kj.model(UserInfoModel.self),userModel.id > 0
+            {
+                return true
+            }
+            else if let baseInfoModel = response.data.kj.model(BaseModel.self),baseInfoModel.result == false,!baseInfoModel.message.isEmpty
+            {
+                throw(CustomError.baseError(errorCode: nil, errorMessage: baseInfoModel.message))
+            }
+            else
+            {
+                return false
+            }
         })
         self.output = Output(wechatLoginResult: wechatLoginResultOut)
     }

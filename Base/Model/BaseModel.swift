@@ -12,6 +12,8 @@ class BaseModel: NSObject,Convertible {
     func kj_modelKey(from property: Property) -> ModelPropertyKey {
         return property.name
     }
+    var message = ""
+    var result = false
     
     required override init(){}
 }

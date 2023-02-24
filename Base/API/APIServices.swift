@@ -64,7 +64,7 @@ extension Service: TargetType
         case let .authLogin(app, nickname, uuid, openid, accessToken):
             var parameters = [String:Any]()
             parameters["app"] = app
-            if let nickname
+            if let nickname,!nickname.isEmpty
             {
                 parameters["nickname"] = nickname
             }
@@ -78,9 +78,9 @@ extension Service: TargetType
             }
             if let accessToken
             {
-                parameters["accessToken"] = accessToken
+                parameters["access_token"] = accessToken
             }
-            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         }
     }
     
