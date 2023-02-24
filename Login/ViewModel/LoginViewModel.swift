@@ -11,6 +11,8 @@ import RxKakaJSON
 import CocoaLumberjack
 final class LoginViewModel: ViewModelType
 {
+    /// 微信授权model
+    static var accessModel = WechatAccessModel()
     /// 实现ViewModelType协议
     struct Input {
         /// 微信登录
@@ -54,14 +56,26 @@ final class LoginViewModel: ViewModelType
         }).flatMapLatest({notification -> Single<Response> in
             return provider.rx.request(.wechatAccessToken(appid: AuthorConstConfig.wxAppid, secret: AuthorConstConfig.wxsecret, code: notification.object as! String, grant_type: "authorization_code"))
         }).map({response -> WechatAccessModel in
-            if let model = response.data.kj.model(WechatAccessModel.self),model.expires_in > 0
+            Self.accessModel.kj_m.convert(from: response.data)
+            if Self.accessModel.expires_in > 0
             {
-                return model
+                return Self.accessModel
             }
             throw(CustomError.baseError(errorCode: nil, errorMessage: "微信授权获取access_token失败"))
         }).flatMapLatest({ accessModel -> Single<Response> in
             return provider.rx.request(.wechatUserInfo(accessToken: accessModel.access_token, openid: accessModel.openid))
-        }).map({_ -> Bool in
+        }).map({response -> WechatAccessModel in
+            Self.accessModel.kj_m.convert(from: response.data)
+            if Self.accessModel.headimgurl.isEmpty
+            {
+                throw(CustomError.baseError(errorCode: nil, errorMessage: "微信获取用户信息失败"))
+            }
+            DDLogDebug(Self.accessModel.headimgurl)
+            return Self.accessModel
+        })
+            
+            
+            .map({_ -> Bool in
             return true
         })
         self.output = Output(wechatLoginResult: wechatLoginResultOut)

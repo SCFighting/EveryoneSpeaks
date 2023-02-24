@@ -72,7 +72,7 @@ extension LibManager: WXApiDelegate
                 if let code = authResp.code
                 {
                     DDLogDebug("用户同意微信授权,code = \(code)")
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "SendAuthResp"), object: "123")
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "SendAuthResp"), object: code)
                 }
                 else
                 {

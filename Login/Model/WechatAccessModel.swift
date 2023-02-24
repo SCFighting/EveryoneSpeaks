@@ -14,11 +14,6 @@ class WechatAccessModel: BaseModel {
     var openid = ""
     var scope = ""
     var unionid = ""
-}
-
-class WechatUserInfoModel: BaseModel {
-    var openid = ""
     var nickname = ""
     var headimgurl = ""
-    var unionid = ""
 }
