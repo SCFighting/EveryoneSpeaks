@@ -8,110 +8,62 @@ import RxSwift
 import RxCocoa
 import Moya
 import RxKakaJSON
+import CocoaLumberjack
 final class LoginViewModel: ViewModelType
 {
-    var input: Input
-    let provider = MoyaProvider<Service>()
-    let provider2 = MoyaProvider<Service>()
-//    let userProvider = MoyaProvider<Service>()
-    var output: Output
-    let dispos = DisposeBag()
-    
+    /// 实现ViewModelType协议
     struct Input {
+        /// 微信登录
+        let wechatLogin: AnyObserver<Void>
     }
     struct Output {
+        /// 微信登录结果
+        let wechatLoginResult:Observable<Bool>
     }
+    /// 输入
+    var input: Input
+    /// 输出
+    var output: Output
     
-    init(input: Input, output: Output) {
-        self.input = input
-        self.output = output
-        NotificationCenter.default.rx.notification(Notification.Name(rawValue: "SendAuthResp")).flatMapLatest({ [self]notification -> Single<Response> in
-//            let provider = MoyaProvider<Service>()
-            let result = provider.rx.request(.wechatAccessToken(appid: AuthorConstConfig.wxAppid, secret: AuthorConstConfig.wxsecret, code: notification.object as? String ?? "error" , grant_type: "authorization_code"))
-            return result
-        }).flatMapLatest({ [self]response -> Single<Response> in
-//            let pro = MoyaProvider<Service>()
-            do {
-                let json = try response.mapJSON() as? Dictionary<String, Any>
-                let accessToken = json?["access_token"] as? String
-                let openid = json?["openid"] as? String
-               
-                if let accessToken, let openid
-                {
-                    let userinfo = provider2.rx.request(.wechatUserInfo(accessToken: accessToken, openid: openid))
-                    return userinfo
-                }
-            }
-            catch
+    
+    /// 私有属性用于内部初始化
+    private let wechatLoginSubject = PublishSubject<Void>()
+    /// 网络请求
+//    let provider = MoyaProvider<Service>();
+    /// 微信平台获取到的access_token
+    var access_token:String?
+    
+    init(provider:MoyaProvider<Service>) {
+        self.input = Input(wechatLogin: wechatLoginSubject.asObserver())
+        let wechatLoginResultOut = wechatLoginSubject.asObservable().map({
+            let req = SendAuthReq()
+            req.scope = "snsapi_userinfo"
+            req.state = "renrenjiang.cn"
+            WXApi.send(req)
+        }).flatMapLatest({
+            NotificationCenter.default.rx.notification(Notification.Name("SendAuthResp"))
+        }).map({notification -> Notification in
+            if let error = notification.object as? CustomError
             {
-                print("ssssssssssssss")
+                throw(error)
             }
-            
-                return provider.rx.request(.wechatUserInfo(accessToken: "token", openid: "is"))
-        }).subscribe(onNext: {response in
-            do{
-                print("response = \(try response.mapJSON())")
-            }
-            catch
+            else
             {
-                print("ssssssssssssss")
+                return notification
             }
-           
-        }).disposed(by: dispos)
-        
-        
-        
-//        NotificationCenter.default.rx.notification(Notification.Name(rawValue: "SendAuthResp")).flatMapLatest({ [self]notification ->Single<Response> in
-//            let provider = MoyaProvider<Service>()
-//            let result = provider.rx.request(.wechatAccessToken(appid: AuthorConstConfig.wxAppid, secret: AuthorConstConfig.wxsecret, code: notification.object as? String ?? "error" , grant_type: "authorization_code"))
-//            return result
-//        }).flatMapLatest({response -> Single<Response> in
-//            let json = response.mapJSON() as? Dictionary<String, Any>
-//            let accessToken = json?["access_token"]
-//            let openid = json?["openid"]
-//            let userInfo = self.provider.rx.request(.wechatAccessToken(appid: AuthorConstConfig.wxAppid, secret: AuthorConstConfig.wxsecret, code: "error" , grant_type: "authorization_code"))
-//            return userInfo
-//        }).subscribe(onNext: {userinfo in
-//            print("userinfo=\(userinfo.mapJSON())")
-//        }).disposed(by: dispos)
-        
-        
-        
-//        .subscribe(onNext: {response in
-//            let model = response.data.kj.model(WechatAccessModel.self)
-//            print("model.access_token=\(String(describing: model?.access_token))")
-//        }).disposed(by: dispos)
-//        NotificationCenter.default.rx.notification(Notification.Name(rawValue: "SendAuthResp")).flatMapLatest { [self] notice in
-//            provider.rx.request(.wechatAccessToken(appid: AuthorConstConfig.wxAppid, secret: AuthorConstConfig.wxsecret, code: notice.object as? String ?? "error", grant_type: "authorization_code"))
-//        }.subscribe(onNext: {respon in
-//            print("r=\(respon)")
-//        }).disposed(by: dispos)
+        }).flatMapLatest({notification -> Single<Response> in
+            return provider.rx.request(.wechatAccessToken(appid: AuthorConstConfig.wxAppid, secret: AuthorConstConfig.wxsecret, code: notification.object as! String, grant_type: "authorization_code"))
+        }).map({response -> WechatAccessModel in
+            if let model = response.data.kj.model(WechatAccessModel.self),model.expires_in > 0
+            {
+                return model
+            }
+            throw(CustomError.baseError(errorCode: nil, errorMessage: "微信授权获取access_token失败"))
+        }).flatMapLatest({ accessModel -> Single<Response> in
+            return provider.rx.request(.wechatUserInfo(accessToken: accessModel.access_token, openid: accessModel.openid))
+        }).map({_ -> Bool in
+            return true
+        })
+        self.output = Output(wechatLoginResult: wechatLoginResultOut)
     }
-
-    
-    /// 发送微信授权登录
-    func sendWxAuthRequest()
-    {
-        let req = SendAuthReq()
-        req.scope = "snsapi_userinfo"
-        req.state = "renrenjiang.cn"
-        WXApi.send(req)
-    }
-    
-    
-//    func queryWechatAccessToken(code: String)
-//    {
-//        let provider = MoyaProvider<Service>()
-//        provider.rx.request(.wechatAccessToken(appid: AuthorConstConfig.wxAppid, secret: AuthorConstConfig.wxsecret, code: code, grant_type: "authorization_code")).subscribe(onSuccess: {response in
-//            if let accessModel = response.data.kj.model(WechatAccessModel.self)
-//            {
-//
-//            }
-//
-//        },onFailure: {error in
-//            print("error = \(error)")
-//        }).disposed(by: disposbag)
-//    }
-    
 }
-

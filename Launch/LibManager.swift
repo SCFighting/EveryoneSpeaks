@@ -26,7 +26,11 @@ class LibManager: NSObject {
         DDLog.add(fileLogger)
         
         /// 初始化微信SDK
-        WXApi.registerApp(AuthorConstConfig.wxAppid, universalLink: AuthorConstConfig.wxUniversalLink)
+        let result = WXApi.registerApp(AuthorConstConfig.wxAppid, universalLink: AuthorConstConfig.wxUniversalLink)
+        if result == false
+        {
+            DDLogError("微信SDK初始化失败")
+        }
         
     }
     
@@ -68,7 +72,7 @@ extension LibManager: WXApiDelegate
                 if let code = authResp.code
                 {
                     DDLogDebug("用户同意微信授权,code = \(code)")
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "SendAuthResp"), object: code)
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "SendAuthResp"), object: "123")
                 }
                 else
                 {

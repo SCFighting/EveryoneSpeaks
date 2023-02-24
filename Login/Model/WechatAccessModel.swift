@@ -15,3 +15,10 @@ class WechatAccessModel: BaseModel {
     var scope = ""
     var unionid = ""
 }
+
+class WechatUserInfoModel: BaseModel {
+    var openid = ""
+    var nickname = ""
+    var headimgurl = ""
+    var unionid = ""
+}

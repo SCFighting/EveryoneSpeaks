@@ -9,52 +9,36 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Moya
+import CocoaLumberjack
+import Toast_Swift
 class LoginController: BaseController {
-
-    let vm = LoginViewModel(input: LoginViewModel.Input(), output: LoginViewModel.Output())
+    static let provider = MoyaProvider<Service>()
+    let vm = LoginViewModel(provider: provider)
     let dispos = DisposeBag()
-    let pp = MoyaProvider<Service>()
     let btn = UIButton(frame: .init(x: 0, y: 0, width: LayoutConstantConfig.screenWidth, height: LayoutConstantConfig.screenHeight))
     override func loadView() {
         super.loadView()
-//        btn.backgroundColor = .red
-//        view.addSubview(btn)
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//        btn.rx.tap.subscribe(onNext: {print("dddddddddd")}).disposed(by: dispos)
-//        btn.rx.tap.bind(to: vm.input.wechatLogin).disposed(by: dispos)
-//        vm.output.wechatLoginResult.drive(onNext: {sss in
-//            print("wwwwwwwwwwww=\(sss)")
-//        },onDisposed: {}).disposed(by: dispos)
-        // Do any additional setup after loading the view.
-//\
-//        Observable<MoyaProvider<Service>>.create { ttt in
-//            ttt.onNext(self.pp)
-//            ttt.onCompleted()
-//            return Disposables.create()
-//        }.bind(to: vm.input.login).disposed(by: dispos)
-//        vm.output.loginResult.subscribe { str in
-//            print("str = \(str)")
-//        }.disposed(by: dispos)
-//        
-        
+        view.addSubview(btn)
+        bindModel()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        vm.sendWxAuthRequest()
+    private func bindModel()
+    {
+        vm.output.wechatLoginResult.subscribe(onNext: {result in
+            DDLogDebug("result=\(result)")
+        },onError: {error in
+            DDLogError("error=\(error)")
+            switch error
+            {
+            case CustomError.baseError( _, let errorMessage):
+                self.view.makeToast(errorMessage,position: .center)
+                break
+            default:
+                break
+            }
+        },onCompleted: {
+            DDLogDebug("dd")
+        }).disposed(by: dispos)
+        btn.rx.tap.bind(to: vm.input.wechatLogin).disposed(by: dispos)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
