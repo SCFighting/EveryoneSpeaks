@@ -123,9 +123,9 @@ class LibManager: NSObject {
     /// 初始化微信SDK
     private func initWechatSDK()
     {
-        WXApi.startLog(by: .detail) { str in
-            DDLogDebug("微信SDKLog: = \(str)")
-        }
+//        WXApi.startLog(by: .detail) { str in
+//            DDLogDebug("微信SDKLog: = \(str)")
+//        }
         
         /// 初始化微信SDK
         let result = WXApi.registerApp(AuthorConstConfig.wxAppid, universalLink: AuthorConstConfig.wxUniversalLink)
