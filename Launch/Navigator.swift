@@ -20,6 +20,10 @@ class Navigator: NSObject {
         }
         LibManager.shared.setupBaseConfig(window: window)
         avtivityWindow = window
+        changeRootViewController()
+    }
+    
+    func changeRootViewController(){
         // 已登录
         if let token = UserDefaults.standard.object(forKey: UserInfoConstantConfig.token) as? String, !token.isEmpty, UserDefaults.standard.integer(forKey: UserInfoConstantConfig.tokenDeadLine) > Int(NSDate().timeIntervalSince1970)
         {
