@@ -192,6 +192,12 @@ extension LibManager: WXApiDelegate
                 let error = CustomError.baseError(errorCode: -2, errorMessage: "用户取消授权")
                 NotificationCenter.default.post(name: Notification.Name(rawValue: "SendAuthResp"), object: error)
             }
+            else if authResp.errCode == -1 //没有网络
+            {
+                DDLogError("当前用户网络不可达")
+                let error = CustomError.baseError(errorCode: -1, errorMessage: "当前用户网络不可达")
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "SendAuthResp"), object: error)
+            }
         }
     }
     
