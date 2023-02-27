@@ -8,22 +8,124 @@
 import Foundation
 import Toast_Swift
 import CocoaLumberjack
+import CoreTelephony
+import RxSwift
+import Alamofire
 
 /// 三方库管理
 class LibManager: NSObject {
+    /// 单例对象
     static let shared = LibManager()
-    /// 初始化第三方库
+    /// 网络权限监听
+    let cellularData = CTCellularData()
+    /// 当前活跃窗口
+    var activityWindow: UIWindow?
+    /// 默认为初始化第三方库
+    var initCommenLibraryFinish = false
+    /// 网络状态监听
+    let networkManager = NetworkReachabilityManager(host: "https://renrenjiang.cn")
+    
+    //MARK: -- public func
+    
+    /// 初始化基本元素(日志和网络监听)
     /// - Parameter window: window
-    func initThirdPardLibrary(window: UIWindow?)
+    func setupBaseConfig(window: UIWindow?){
+        activityWindow = window
+        initDDLog()
+        starNetworkMonitor()
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        DispatchQueue.main.async {
+            WXApi.handleOpen(url, delegate: LibManager.shared)
+        }
+        return true
+    }
+    
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        DispatchQueue.main.async {
+            WXApi.handleOpenUniversalLink(userActivity, delegate: self)
+        }
+        return true
+    }
+    
+    //MARK: -- private func
+    
+    /// 初始化DDLog
+    private func initDDLog()
     {
-        /// 初始化日志
         DDOSLogger.sharedInstance.logFormatter = CustomLogFormatter()
         DDLog.add(DDOSLogger.sharedInstance)
         let fileLogger: DDFileLogger = DDFileLogger()
         fileLogger.logFormatter = CustomLogFormatter()
-        fileLogger.rollingFrequency = 7 * 60 * 60 * 24 
+        fileLogger.rollingFrequency = 7 * 60 * 60 * 24
         fileLogger.logFileManager.maximumNumberOfLogFiles = 7
         DDLog.add(fileLogger)
+    }
+    
+    /// 启动网络监听
+    private func starNetworkMonitor() {
+        cellularData.cellularDataRestrictionDidUpdateNotifier = { [self]state in
+            switch state
+            {
+            case .notRestricted:
+                DDLogDebug("网络已授权")
+                if initCommenLibraryFinish == false
+                {
+                    initCommenLibrary()
+                }
+                break
+            case .restricted:
+                DDLogError("请到设置中配置网络权限")
+                activityWindow?.makeToast("请到设置中配置网络权限")
+                break
+            case .restrictedStateUnknown:
+                DDLogError("网络权限未知")
+                activityWindow?.makeToast("网络权限未知")
+                break
+            default:
+                break
+            }
+        }
+        
+        
+        networkManager?.startListening(onUpdatePerforming: { [self] status in
+            switch status
+            {
+            case .unknown:
+                DDLogError("网络状态未知")
+                break
+            case .notReachable:
+                DDLogError("网络状态不可达")
+                break
+            case .reachable(_):
+                DDLogDebug("网络已联通")
+                if initCommenLibraryFinish == false
+                {
+                    initCommenLibrary()
+                }
+                break
+            }
+        })
+        
+    }
+    
+    /// 初始化第三方库
+    /// - Parameter window: window
+    private func initCommenLibrary()
+    {
+        DispatchQueue.main.async { [self] in
+            /// 初始化微信SDK
+            initWechatSDK()
+        }
+    }
+    
+    /// 初始化微信SDK
+    private func initWechatSDK()
+    {
+        WXApi.startLog(by: .detail) { str in
+            DDLogDebug("微信SDKLog: = \(str)")
+        }
         
         /// 初始化微信SDK
         let result = WXApi.registerApp(AuthorConstConfig.wxAppid, universalLink: AuthorConstConfig.wxUniversalLink)
@@ -32,15 +134,12 @@ class LibManager: NSObject {
             DDLogError("微信SDK初始化失败")
         }
         
+//        WXApi.checkUniversalLinkReady { step , result in
+//            DDLogDebug("step = \(step), result = \(result)")
+//        }
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return WXApi.handleOpen(url, delegate: LibManager.shared)
-    }
     
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        return WXApi.handleOpenUniversalLink(userActivity, delegate: self)
-    }
     
     private override init() {}
     override func copy() -> Any {
