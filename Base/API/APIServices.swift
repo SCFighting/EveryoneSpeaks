@@ -78,7 +78,7 @@ extension Service: TargetType
             }
             if let accessToken
             {
-                parameters["access_token"] = accessToken
+                parameters["access_token"] = "dd"//accessToken
             }
             parameters["version"] = "4.2.50"
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)

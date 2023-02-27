@@ -39,7 +39,6 @@ class LoginController: BaseController {
                         DDLogError(errorMessage)
                         self.view.makeToast(errorMessage)
                     }
-                    DDLogError("shibi")
                     break
                 }
                 break
