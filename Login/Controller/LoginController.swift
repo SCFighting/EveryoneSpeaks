@@ -25,7 +25,25 @@ class LoginController: BaseController {
     private func bindModel()
     {
         vm.output.wechatLoginResult.subscribe(onNext: {result in
-            DDLogDebug("result=\(result)")
+            switch result
+            {
+            case .success(let appinfoModel):
+                DDLogDebug("登陆成功\(appinfoModel?.user.user_id ?? 0)")
+                break
+            case .failure(let error):
+                switch error
+                {
+                case .baseError(_,let errorMessage):
+                    if let errorMessage
+                    {
+                        DDLogError(errorMessage)
+                        self.view.makeToast(errorMessage)
+                    }
+                    DDLogError("shibi")
+                    break
+                }
+                break
+            }
         },onError: {error in
             DDLogError("error=\(error)")
             switch error

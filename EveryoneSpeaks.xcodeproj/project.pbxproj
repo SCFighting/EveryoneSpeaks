@@ -12,6 +12,7 @@
 		524DE4CB29A85EA7008D1A8A /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4CA29A85EA7008D1A8A /* BaseModel.swift */; };
 		524DE4CF29A85F72008D1A8A /* CustomerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4CE29A85F72008D1A8A /* CustomerError.swift */; };
 		524DE4D229A86579008D1A8A /* BaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4D129A86579008D1A8A /* BaseExtension.swift */; };
+		524DE4D629AC84B3008D1A8A /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4D529AC84B3008D1A8A /* UserInfoModel.swift */; };
 		52713F512990DDF600BA8D11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52713F452990DDF600BA8D11 /* AppDelegate.swift */; };
 		52713F522990DDF600BA8D11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52713F462990DDF600BA8D11 /* SceneDelegate.swift */; };
 		52713F532990DDF600BA8D11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52713F482990DDF600BA8D11 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		524DE4CA29A85EA7008D1A8A /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		524DE4CE29A85F72008D1A8A /* CustomerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerError.swift; sourceTree = "<group>"; };
 		524DE4D129A86579008D1A8A /* BaseExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseExtension.swift; sourceTree = "<group>"; };
+		524DE4D529AC84B3008D1A8A /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		52713F2D2990DB7000BA8D11 /* EveryoneSpeaks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EveryoneSpeaks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52713F452990DDF600BA8D11 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52713F462990DDF600BA8D11 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				524DE4C529A5B952008D1A8A /* WechatAccessModel.swift */,
+				524DE4D529AC84B3008D1A8A /* UserInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				524DE4CF29A85F72008D1A8A /* CustomerError.swift in Sources */,
 				52E4F1052993812F00A8FE32 /* LoginViewModel.swift in Sources */,
 				524DE4CB29A85EA7008D1A8A /* BaseModel.swift in Sources */,
+				524DE4D629AC84B3008D1A8A /* UserInfoModel.swift in Sources */,
 				52E4F1022993803700A8FE32 /* ViewModelProtocol.swift in Sources */,
 				52713F512990DDF600BA8D11 /* AppDelegate.swift in Sources */,
 				524DE4C629A5B952008D1A8A /* WechatAccessModel.swift in Sources */,

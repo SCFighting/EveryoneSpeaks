@@ -80,6 +80,7 @@ extension Service: TargetType
             {
                 parameters["access_token"] = accessToken
             }
+            parameters["version"] = "4.2.50"
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         }
     }

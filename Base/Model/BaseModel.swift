@@ -13,7 +13,7 @@ class BaseModel: NSObject,Convertible {
         return property.name
     }
     var message = ""
-    var result = false
+    var result = "ok"
     
     required override init(){}
 }

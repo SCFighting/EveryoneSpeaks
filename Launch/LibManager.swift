@@ -23,7 +23,7 @@ class LibManager: NSObject {
     /// 默认为初始化第三方库
     var initCommenLibraryFinish = false
     /// 网络状态监听
-    let networkManager = NetworkReachabilityManager(host: "https://renrenjiang.cn")
+    let networkManager = NetworkReachabilityManager()
     
     //MARK: -- public func
     
