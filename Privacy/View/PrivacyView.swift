@@ -10,6 +10,8 @@ import ActiveLabel
 
 class PrivacyView: BaseView {
 
+    let viewModel = PrivacyViewModel()
+    let disposBag = DisposeBag()
     override init() {
         super.init()
        
@@ -57,6 +59,70 @@ class PrivacyView: BaseView {
             make.centerX.equalTo(confirmButton)
             make.bottom.equalTo(gradientView.snp.bottom).offset(-15)
         }
+        bindModel()
+    }
+    
+    func bindModel() {
+        self.confirmButton.rx.tap.bind(to: viewModel.input.confirm).disposed(by: disposBag)
+        self.refuseButton.rx.tap.bind(to: viewModel.input.refuse).disposed(by: disposBag)
+        viewModel.output.privacy.subscribe(onNext: {type in
+            switch type
+            {
+            case .userPrivacy:
+                DDLogDebug("用户协议")
+                
+                break
+            case .privacyPolicy:
+                DDLogDebug("隐私协议")
+                break
+            case .childPrivacy:
+                DDLogDebug("儿童隐私协议")
+                break
+            }
+        }).disposed(by: disposBag)
+        viewModel.output.confirm.subscribe(onNext: {
+            DDLogDebug("用户同意")
+            UIView.transition(with: self, duration: 0.3) {
+                self.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            } completion: { finish in
+                if finish
+                {
+                    self.removeFromSuperview()
+                }
+            }
+            UserDefaults.standard.set(true, forKey: "showPrivacy")
+            UserDefaults.standard.synchronize()
+
+        }).disposed(by: disposBag)
+        viewModel.output.refuse.subscribe(onNext: { [self] in
+            DDLogDebug("用户不同意")
+            if refuseButton.titleLabel?.text == "放弃使用"
+            {
+                exit(0)
+            }
+            else
+            {
+                UIView.transition(with: containerView, duration: 0.3,options: .curveEaseInOut) { [self] in
+                    containerView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                    titleLabel.text = "温馨提示"
+                    let customTypeOne = ActiveType.custom(pattern: "《人人讲用户协议》")
+                    let customTypeTwo = ActiveType.custom(pattern: "《人人讲隐私政策》")
+                    let customTypeThree = ActiveType.custom(pattern: "《儿童|青少年个人信息保护法规》")
+                    activityLabel.enabledTypes = [customTypeOne,customTypeTwo,customTypeThree]
+                    activityLabel.lineSpacing = 5
+                    activityLabel.text = """
+                                 如果您不同意《人人讲用户协议》和《人人讲隐私政策》以及《儿童|青少年个人信息保护法规》,很遗憾我们将无法为您提供服务,你需要同意以上协议后,才能使用人人讲
+                                 我们将严格按照相关法律法规要求,坚决保障您的个人隐私和信息安全
+                                 """
+                    confirmButton.setTitle("同意并继续", for: .normal)
+                    refuseButton.setTitle("放弃使用", for: .normal)
+                }
+                UIView.animate(withDuration: 0.3, delay: 0.3) { [self] in
+                    containerView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                }
+            }
+            
+        }).disposed(by: disposBag)
     }
     
     override func layoutSubviews() {
@@ -124,8 +190,23 @@ class PrivacyView: BaseView {
         label.customColor[customTypeTwo] = .init(hexString: "#F4350B")
         label.customColor[customTypeThree] = .init(hexString: "#F4350B")
         label.textColor = .init(hexString: "#000000")
-        label.handleCustomTap(for: customTypeOne) { str in
-            print(str)
+        label.handleCustomTap(for: customTypeOne) { [self] _ in
+            Observable.create { observer in
+                observer.onNext(PrivacyType.userPrivacy)
+                return Disposables.create()
+            }.bind(to: viewModel.input.privacy).disposed(by: disposBag)
+        }
+        label.handleCustomTap(for: customTypeTwo) { [self] _ in
+            Observable.create { observer in
+                observer.onNext(PrivacyType.privacyPolicy)
+                return Disposables.create()
+            }.bind(to: viewModel.input.privacy).disposed(by: disposBag)
+        }
+        label.handleCustomTap(for: customTypeThree) { [self] _ in
+            Observable.create { observer in
+                observer.onNext(PrivacyType.childPrivacy)
+                return Disposables.create()
+            }.bind(to: viewModel.input.privacy).disposed(by: disposBag)
         }
         return label
     }()
