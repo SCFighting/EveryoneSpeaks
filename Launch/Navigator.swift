@@ -21,6 +21,14 @@ class Navigator: NSObject {
         LibManager.shared.setupBaseConfig(window: window)
         avtivityWindow = window
         changeRootViewController()
+        if UserInfoConstantConfig.showPrivacy == false
+        {
+            let privacyView = PrivacyView()
+            window.addSubview(privacyView)
+            privacyView.snp.makeConstraints { make in
+                make.edges.equalTo(window)
+            }
+        }
     }
     
     func changeRootViewController(){

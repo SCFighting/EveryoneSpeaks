@@ -10,12 +10,46 @@ import ActiveLabel
 
 class PrivacyView: BaseView {
 
+    override init() {
+        super.init()
+        self.backgroundColor = .init(hexString: "#000000").withAlphaComponent(0.3)
+        addSubview(containerView)
+        containerView.addSubview(titleLabel)
+        containerView.addSubview(activityLabel)
+        containerView.snp.makeConstraints { make in
+            make.center.equalTo(self)
+            make.size.equalTo(CGSize(width: LayoutConstantConfig.screenWidth-60, height: LayoutConstantConfig.screenHeight/2))
+        }
+        titleLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(containerView)
+            make.top.equalTo(containerView.snp.top).offset(15)
+        }
+        activityLabel.snp.makeConstraints { make in
+            make.left.equalTo(containerView.snp.left).offset(15)
+            make.right.equalTo(containerView.snp.right).offset(-15)
+            make.top.equalTo(titleLabel.snp.bottom).offset(15)
+            make.bottom.lessThanOrEqualTo(containerView.snp.bottom).offset(-15)
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: -- Getter
+    
+    lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .init(hexString: "#FFFFFF")
+        view.layer.cornerRadius = 15
+        view.clipsToBounds = true
+        return view
+    }()
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "个人信息保护提示"
-        label.textColor = UIColor("#202020")
+        label.textColor = .init(hexString: "#202020")
         label.font = .systemFont(ofSize: 18, weight: .medium)
         return label
     }()
@@ -34,10 +68,10 @@ class PrivacyView: BaseView {
                      """
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 14, weight: .regular)
-        label.customColor[customTypeOne] = UIColor("#F4350B")
-        label.customColor[customTypeTwo] = UIColor("#F4350B")
-        label.customColor[customTypeThree] = UIColor("#F4350B")
-        label.textColor = UIColor("#CBCBCB")
+        label.customColor[customTypeOne] = .init(hexString: "#F4350B")
+        label.customColor[customTypeTwo] = .init(hexString: "#F4350B")
+        label.customColor[customTypeThree] = .init(hexString: "#F4350B")
+        label.textColor = .init(hexString: "#CBCBCB")
         label.handleCustomTap(for: customTypeOne) { str in
             print(str)
         }

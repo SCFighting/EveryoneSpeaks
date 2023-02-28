@@ -15,6 +15,6 @@ import Foundation
 @_exported import Moya
 @_exported import Alamofire
 @_exported import Toast_Swift
-@_exported import UIColor_Hex_Swift
+@_exported import DynamicColor
 @_exported import CocoaLumberjack
-
+@_exported import SnapKit

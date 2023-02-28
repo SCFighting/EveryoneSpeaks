@@ -11,7 +11,7 @@ target 'EveryoneSpeaks' do
   pod 'Moya/RxSwift', '~> 15.0'
   pod 'RxSwift', '6.5.0'
   pod 'RxCocoa', '6.5.0'
-  pod 'UIColor_Hex_Swift'
+  pod 'DynamicColor', '~> 5.0.0'
   pod 'CodeTextField', '~> 0.4.0'
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'ActiveLabel'
