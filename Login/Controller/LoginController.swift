@@ -10,10 +10,9 @@ class LoginController: BaseController {
     static let provider = MoyaProvider<Service>()
     let vm = LoginViewModel(provider: provider)
     let dispos = DisposeBag()
-    let btn = UIButton(frame: .init(x: 0, y: 0, width: LayoutConstantConfig.screenWidth, height: LayoutConstantConfig.screenHeight))
     override func loadView() {
         super.loadView()
-        view.addSubview(btn)
+        self.view = mainLoginView
         bindModel()
     }
     
@@ -52,6 +51,12 @@ class LoginController: BaseController {
         },onCompleted: {
             DDLogDebug("dd")
         }).disposed(by: dispos)
-        btn.rx.tap.bind(to: vm.input.wechatLogin).disposed(by: dispos)
+        mainLoginView.wechatLogin.rx.tap.bind(to: vm.input.wechatLogin).disposed(by: dispos)
     }
+    
+    //MARK: --getter
+    lazy var mainLoginView: MainLoginView = {
+        let view = MainLoginView()
+        return view
+    }()
 }
