@@ -6,11 +6,7 @@
 //
 
 import Foundation
-import Toast_Swift
-import CocoaLumberjack
 import CoreTelephony
-import RxSwift
-import Alamofire
 
 /// 三方库管理
 class LibManager: NSObject {

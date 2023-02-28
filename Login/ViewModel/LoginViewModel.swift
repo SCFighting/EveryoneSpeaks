@@ -4,11 +4,6 @@
 //
 //  Created by 孙超 on 2023/2/8.
 //
-import RxSwift
-import RxCocoa
-import Moya
-import RxKakaJSON
-import CocoaLumberjack
 final class LoginViewModel: ViewModelType
 {
     /// 微信授权model

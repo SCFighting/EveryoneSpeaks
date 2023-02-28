@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CocoaLumberjack
 
 class CustomLogFormatter:NSObject, DDLogFormatter
 {

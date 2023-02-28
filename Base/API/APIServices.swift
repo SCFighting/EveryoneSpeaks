@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Moya
 
 enum Service {
     //MARK: -- 登录相关API

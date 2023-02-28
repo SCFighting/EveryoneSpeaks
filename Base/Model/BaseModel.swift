@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import KakaJSON
 
 class BaseModel: NSObject,Convertible {
     func kj_modelKey(from property: Property) -> ModelPropertyKey {
