@@ -18,8 +18,8 @@ class Navigator: NSObject {
         guard let window else {
             return
         }
-        LibManager.shared.setupBaseConfig(window: window)
         avtivityWindow = window
+        LibManager.shared.setupBaseConfig(window: window)
         changeRootViewController()
     }
     

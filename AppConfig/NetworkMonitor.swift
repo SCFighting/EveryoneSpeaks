@@ -25,6 +25,7 @@ class NetworkMonitor {
     var networkEnable = false
     
     private init(){}
+
     
     func starNetWorkMonitor(){
         self.networkManage?.startListening(onQueue: DispatchQueue.main, onUpdatePerforming: { [self] status in
