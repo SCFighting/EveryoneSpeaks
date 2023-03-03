@@ -34,7 +34,7 @@ final class LoginViewModel: ViewModelType
         
         self.input = Input(wechatLogin: wechatLoginSubject.asObserver())
         let wechatLoginResultOut = wechatLoginSubject.asObservable().map({//发起微信授权请求
-            if LibManager.shared.networkEnable
+            if NetworkMonitor.shared.networkEnable
             {
                 DDLogDebug("发起微信授权请求")
                 let req = SendAuthReq()

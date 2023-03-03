@@ -16,8 +16,7 @@ class LibManager: NSObject {
     var activityWindow: UIWindow?
     /// 默认为初始化第三方库
     var initCommenLibraryFinish = false
-    /// 网络是否可用
-    var networkEnable = false
+    
     let disposbag = DisposeBag()
     
     //MARK: -- public func
@@ -27,25 +26,31 @@ class LibManager: NSObject {
     func setupBaseConfig(window: UIWindow?){
         activityWindow = window
         initDDLog()
-        NetworkMonitor.shared.networkStatus.subscribe(onNext: { [self] status in
+        NetworkMonitor.shared.starNetWorkMonitor()
+        NetworkMonitor.shared.networkStatus.observe(on: MainScheduler.asyncInstance).subscribe(onNext: { [self] status in
             switch status
             {
             case .unknown:
-                networkEnable = false
                 DDLogError("当前网络状态未知")
                 break
             case .restricted:
-                networkEnable = false
                 DDLogError("当前网络未授权")
+                
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: UInt64(0.5 * Double(NSEC_PER_SEC))), execute: DispatchWorkItem(block: { [self] in
+                    let alert = UIAlertController(title: nil, message: "前往打开网络权限", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "好的", style: .default,handler: { _ in
+                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                    }))
+                    activityWindow?.rootViewController?.present(alert, animated: true)
+                }))
                 break
             case .notReachable:
-                networkEnable = false
                 DDLogError("当前网络不可用")
                 activityWindow?.makeToast("当前网络不可用")
                 break
             case .reachable(netType: let netType):
+                activityWindow?.rootViewController?.presentedViewController?.dismiss(animated: false)
                 activityWindow?.makeToast("切换至\(netType)")
-                networkEnable = true
                 setupPrivacyAndSDK()
                 break
             }
