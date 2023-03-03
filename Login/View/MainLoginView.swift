@@ -47,7 +47,7 @@ class MainLoginView: BaseView {
     
     lazy var desLabel: UILabel = {
         let label = UILabel()
-        label.text = "啦啦啦啦啦"
+        label.text = "人人都是讲师"
         label.textColor = .init(hexString: "#BABABA")
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.textAlignment = .center

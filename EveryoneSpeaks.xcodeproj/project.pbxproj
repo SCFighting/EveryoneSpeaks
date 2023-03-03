@@ -19,6 +19,9 @@
 		524DE4E329ADCD6E008D1A8A /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4E229ADCD6E008D1A8A /* GradientView.swift */; };
 		524DE4E529ADE1D2008D1A8A /* PrivacyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4E429ADE1D2008D1A8A /* PrivacyViewModel.swift */; };
 		524DE4E729AE1AD2008D1A8A /* MainLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4E629AE1AD2008D1A8A /* MainLoginView.swift */; };
+		524DE4E929AE234C008D1A8A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4E829AE234C008D1A8A /* HomeController.swift */; };
+		524DE4EB29AE2361008D1A8A /* MineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4EA29AE2361008D1A8A /* MineController.swift */; };
+		524DE4ED29AE2598008D1A8A /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4EC29AE2598008D1A8A /* RootController.swift */; };
 		52713F512990DDF600BA8D11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52713F452990DDF600BA8D11 /* AppDelegate.swift */; };
 		52713F522990DDF600BA8D11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52713F462990DDF600BA8D11 /* SceneDelegate.swift */; };
 		52713F532990DDF600BA8D11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52713F482990DDF600BA8D11 /* Assets.xcassets */; };
@@ -50,6 +53,9 @@
 		524DE4E229ADCD6E008D1A8A /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		524DE4E429ADE1D2008D1A8A /* PrivacyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewModel.swift; sourceTree = "<group>"; };
 		524DE4E629AE1AD2008D1A8A /* MainLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLoginView.swift; sourceTree = "<group>"; };
+		524DE4E829AE234C008D1A8A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		524DE4EA29AE2361008D1A8A /* MineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineController.swift; sourceTree = "<group>"; };
+		524DE4EC29AE2598008D1A8A /* RootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
 		52713F2D2990DB7000BA8D11 /* EveryoneSpeaks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EveryoneSpeaks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52713F452990DDF600BA8D11 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52713F462990DDF600BA8D11 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +138,9 @@
 		524DE4D729ACAA2A008D1A8A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				524DE4E829AE234C008D1A8A /* HomeController.swift */,
+				524DE4EA29AE2361008D1A8A /* MineController.swift */,
+				524DE4EC29AE2598008D1A8A /* RootController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -422,6 +431,7 @@
 			files = (
 				524DE4E329ADCD6E008D1A8A /* GradientView.swift in Sources */,
 				52713F5A2991F2BE00BA8D11 /* AppConfig.swift in Sources */,
+				524DE4E929AE234C008D1A8A /* HomeController.swift in Sources */,
 				52713F662992489800BA8D11 /* LoginController.swift in Sources */,
 				524DE4E529ADE1D2008D1A8A /* PrivacyViewModel.swift in Sources */,
 				524DE4D229A86579008D1A8A /* BaseExtension.swift in Sources */,
@@ -439,8 +449,10 @@
 				524DE4C629A5B952008D1A8A /* WechatAccessModel.swift in Sources */,
 				524DE4E129ADA73C008D1A8A /* CommenLib.swift in Sources */,
 				52713F522990DDF600BA8D11 /* SceneDelegate.swift in Sources */,
+				524DE4EB29AE2361008D1A8A /* MineController.swift in Sources */,
 				5282EE87299B5903005710F2 /* APIServices.swift in Sources */,
 				524DE4DC29AD9877008D1A8A /* BaseView.swift in Sources */,
+				524DE4ED29AE2598008D1A8A /* RootController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

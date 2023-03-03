@@ -24,6 +24,7 @@ class LoginController: BaseController {
             case .success(let appinfoModel):
                 Navigator.shared.changeRootViewController()
                 DDLogDebug("登陆成功\(appinfoModel?.user.user_id ?? 0)")
+                Navigator.shared.changeRootViewController()
                 break
             case .failure(let error):
                 switch error

@@ -23,18 +23,30 @@ final class LoginViewModel: ViewModelType
     /// 输出
     var output: Output
     
+    var networkEnable: Bool = false
+
+    
     
     /// 私有属性用于内部初始化
     private let wechatLoginSubject = PublishSubject<Void>()
     
     init(provider:MoyaProvider<Service>) {
+        
         self.input = Input(wechatLogin: wechatLoginSubject.asObserver())
         let wechatLoginResultOut = wechatLoginSubject.asObservable().map({//发起微信授权请求
-            DDLogDebug("发起微信授权请求")
-            let req = SendAuthReq()
-            req.scope = "snsapi_userinfo"
-            req.state = "renrenjiang.cn"
-            WXApi.send(req)
+            if LibManager.shared.networkEnable
+            {
+                DDLogDebug("发起微信授权请求")
+                let req = SendAuthReq()
+                req.scope = "snsapi_userinfo"
+                req.state = "renrenjiang.cn"
+                WXApi.send(req)
+            }
+            else
+            {
+                DDLogError("发起微信授权请求失败,网络不可达")
+                LibManager.shared.activityWindow?.makeToast("网络不可达")
+            }
         }).flatMapLatest({ _ ->Observable<Result<String,CustomError>> in  //监听微信授权回调通知
             let notificationResult = Observable.create { observer in
                 DDLogDebug("监听微信授权回调通知")
@@ -113,6 +125,9 @@ final class LoginViewModel: ViewModelType
                         {
                             if appInfo.result == "ok"
                             {
+                                UserDefaults.standard.set(appInfo.token?.id, forKey: UserInfoConstantConfig.token)
+                                UserDefaults.standard.set(appInfo.token?.exp, forKey: UserInfoConstantConfig.tokenDeadLine)
+                                UserDefaults.standard.synchronize()
                                 observer.onNext(Result<AppLoginInfoModel?,CustomError>.success(appInfo))
                             }
                             else

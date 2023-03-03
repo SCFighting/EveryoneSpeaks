@@ -20,6 +20,8 @@ class LibManager: NSObject {
     var initCommenLibraryFinish = false
     /// 网络状态监听
     let networkManager = NetworkReachabilityManager()
+    /// 网络是否可用
+    var networkEnable = false
     
     //MARK: -- public func
     
@@ -62,49 +64,66 @@ class LibManager: NSObject {
     /// 启动网络监听
     private func starNetworkMonitor() {
         cellularData.cellularDataRestrictionDidUpdateNotifier = { [self]state in
-            switch state
-            {
-            case .notRestricted:
-                DDLogDebug("网络已授权")
-                if initCommenLibraryFinish == false
+            DispatchQueue.main.async { [self] in
+                switch state
                 {
-                    initCommenLibrary()
+                case .notRestricted:
+                    DDLogDebug("网络已授权")
+                    setupPrivacyAndSDK()
+                    break
+                case .restricted:
+                    DDLogError("请到设置中配置网络权限")
+                    activityWindow?.makeToast("请到设置中配置网络权限")
+                    break
+                case .restrictedStateUnknown:
+                    DDLogError("网络权限未知")
+                    activityWindow?.makeToast("网络权限未知")
+                    break
+                default:
+                    break
                 }
-                break
-            case .restricted:
-                DDLogError("请到设置中配置网络权限")
-                activityWindow?.makeToast("请到设置中配置网络权限")
-                break
-            case .restrictedStateUnknown:
-                DDLogError("网络权限未知")
-                activityWindow?.makeToast("网络权限未知")
-                break
-            default:
-                break
             }
         }
         
         
         networkManager?.startListening(onUpdatePerforming: { [self] status in
-            switch status
-            {
-            case .unknown:
-                DDLogError("网络状态未知")
-                break
-            case .notReachable:
-                DDLogError("网络状态不可达")
-                break
-            case .reachable(_):
-                DDLogDebug("网络已联通")
-                if initCommenLibraryFinish == false
+            DispatchQueue.main.async { [self] in
+                switch status
                 {
-                    initCommenLibrary()
+                case .unknown:
+                    DDLogError("网络状态未知")
+                    LibManager.shared.networkEnable = false
+                    break
+                case .notReachable:
+                    DDLogError("网络状态不可达")
+                    LibManager.shared.networkEnable = false
+                    break
+                case .reachable(_):
+                    DDLogDebug("网络已联通")
+                    LibManager.shared.networkEnable = true
+                    setupPrivacyAndSDK()
+                    break
                 }
-                break
             }
         })
-        
     }
+    
+    private func setupPrivacyAndSDK()
+    {
+        if initCommenLibraryFinish == false
+        {
+            initCommenLibrary()
+        }
+        if UserInfoConstantConfig.showPrivacy == false,let activityWindow
+        {
+            let privacyView = PrivacyView()
+            activityWindow.addSubview(privacyView)
+            privacyView.snp.makeConstraints { make in
+                make.edges.equalTo(activityWindow)
+            }
+        }
+    }
+    
     
     /// 初始化第三方库
     /// - Parameter window: window

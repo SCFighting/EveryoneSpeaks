@@ -9,7 +9,7 @@ import UIKit
 
 class Token: BaseModel
 {
-    var id = 0
+    var id = ""
     var exp = 0
     var userId = 0
 }
