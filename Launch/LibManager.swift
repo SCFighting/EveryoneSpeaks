@@ -12,16 +12,13 @@ import CoreTelephony
 class LibManager: NSObject {
     /// 单例对象
     static let shared = LibManager()
-    /// 网络权限监听
-    let cellularData = CTCellularData()
     /// 当前活跃窗口
     var activityWindow: UIWindow?
     /// 默认为初始化第三方库
     var initCommenLibraryFinish = false
-    /// 网络状态监听
-    let networkManager = NetworkReachabilityManager()
     /// 网络是否可用
     var networkEnable = false
+    let disposbag = DisposeBag()
     
     //MARK: -- public func
     
@@ -30,9 +27,31 @@ class LibManager: NSObject {
     func setupBaseConfig(window: UIWindow?){
         activityWindow = window
         initDDLog()
-        starNetworkMonitor()
+        NetworkMonitor.shared.networkStatus.subscribe(onNext: { [self] status in
+            switch status
+            {
+            case .unknown:
+                networkEnable = false
+                DDLogError("当前网络状态未知")
+                break
+            case .restricted:
+                networkEnable = false
+                DDLogError("当前网络未授权")
+                break
+            case .notReachable:
+                networkEnable = false
+                DDLogError("当前网络不可用")
+                activityWindow?.makeToast("当前网络不可用")
+                break
+            case .reachable(netType: let netType):
+                activityWindow?.makeToast("切换至\(netType)")
+                networkEnable = true
+                setupPrivacyAndSDK()
+                break
+            }
+        }).disposed(by: disposbag)
     }
-    
+        
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         DispatchQueue.main.async {
             WXApi.handleOpen(url, delegate: LibManager.shared)
@@ -59,53 +78,6 @@ class LibManager: NSObject {
         fileLogger.rollingFrequency = 7 * 60 * 60 * 24
         fileLogger.logFileManager.maximumNumberOfLogFiles = 7
         DDLog.add(fileLogger)
-    }
-    
-    /// 启动网络监听
-    private func starNetworkMonitor() {
-        cellularData.cellularDataRestrictionDidUpdateNotifier = { [self]state in
-            DispatchQueue.main.async { [self] in
-                switch state
-                {
-                case .notRestricted:
-                    DDLogDebug("网络已授权")
-                    setupPrivacyAndSDK()
-                    break
-                case .restricted:
-                    DDLogError("请到设置中配置网络权限")
-                    activityWindow?.makeToast("请到设置中配置网络权限")
-                    break
-                case .restrictedStateUnknown:
-                    DDLogError("网络权限未知")
-                    activityWindow?.makeToast("网络权限未知")
-                    break
-                default:
-                    break
-                }
-            }
-        }
-        
-        
-        networkManager?.startListening(onUpdatePerforming: { [self] status in
-            DispatchQueue.main.async { [self] in
-                switch status
-                {
-                case .unknown:
-                    DDLogError("网络状态未知")
-                    LibManager.shared.networkEnable = false
-                    break
-                case .notReachable:
-                    DDLogError("网络状态不可达")
-                    LibManager.shared.networkEnable = false
-                    break
-                case .reachable(_):
-                    DDLogDebug("网络已联通")
-                    LibManager.shared.networkEnable = true
-                    setupPrivacyAndSDK()
-                    break
-                }
-            }
-        })
     }
     
     private func setupPrivacyAndSDK()

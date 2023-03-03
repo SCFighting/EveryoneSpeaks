@@ -22,6 +22,7 @@
 		524DE4E929AE234C008D1A8A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4E829AE234C008D1A8A /* HomeController.swift */; };
 		524DE4EB29AE2361008D1A8A /* MineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4EA29AE2361008D1A8A /* MineController.swift */; };
 		524DE4ED29AE2598008D1A8A /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4EC29AE2598008D1A8A /* RootController.swift */; };
+		524DE4F229B1C1D0008D1A8A /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4F129B1C1D0008D1A8A /* NetworkMonitor.swift */; };
 		52713F512990DDF600BA8D11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52713F452990DDF600BA8D11 /* AppDelegate.swift */; };
 		52713F522990DDF600BA8D11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52713F462990DDF600BA8D11 /* SceneDelegate.swift */; };
 		52713F532990DDF600BA8D11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52713F482990DDF600BA8D11 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		524DE4E829AE234C008D1A8A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		524DE4EA29AE2361008D1A8A /* MineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineController.swift; sourceTree = "<group>"; };
 		524DE4EC29AE2598008D1A8A /* RootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
+		524DE4F129B1C1D0008D1A8A /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		52713F2D2990DB7000BA8D11 /* EveryoneSpeaks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EveryoneSpeaks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52713F452990DDF600BA8D11 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52713F462990DDF600BA8D11 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				52713F592991F2BE00BA8D11 /* AppConfig.swift */,
+				524DE4F129B1C1D0008D1A8A /* NetworkMonitor.swift */,
 			);
 			path = AppConfig;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				524DE4CF29A85F72008D1A8A /* CustomerError.swift in Sources */,
 				524DE4E729AE1AD2008D1A8A /* MainLoginView.swift in Sources */,
 				524DE4DE29AD989A008D1A8A /* PrivacyView.swift in Sources */,
+				524DE4F229B1C1D0008D1A8A /* NetworkMonitor.swift in Sources */,
 				52E4F1052993812F00A8FE32 /* LoginViewModel.swift in Sources */,
 				524DE4CB29A85EA7008D1A8A /* BaseModel.swift in Sources */,
 				524DE4D629AC84B3008D1A8A /* UserInfoModel.swift in Sources */,

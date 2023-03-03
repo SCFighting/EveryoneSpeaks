@@ -73,7 +73,9 @@ struct UserInfoConstantConfig {
     /// deadLine对应的key
     static let tokenDeadLine = "deadLine"
     /// 是否展示了隐私协议
-    static let showPrivacy = UserDefaults.standard.bool(forKey: "showPrivacy")
+    static var showPrivacy: Bool{
+        UserDefaults.standard.bool(forKey: "showPrivacy")
+    }
 }
 
 /// 第三方库授权常量
