@@ -19,7 +19,7 @@ enum NetWorkStatus {
 class NetworkMonitor {
     static let shared = NetworkMonitor()
     let networkManage = NetworkReachabilityManager()
-    var networkStatus: Observable<NetWorkStatus> {
+    lazy var networkStatus: Observable<NetWorkStatus> = {
         let status = Observable.create { observer in
             NetworkMonitor.shared.networkManage?.startListening(onQueue: DispatchQueue.main, onUpdatePerforming: { status in
                 switch status
@@ -61,5 +61,5 @@ class NetworkMonitor {
             return Disposables.create()
         }
         return status
-    }
+    }()
 }
