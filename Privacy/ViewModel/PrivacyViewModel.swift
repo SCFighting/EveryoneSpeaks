@@ -16,7 +16,7 @@ enum PrivacyType {
     case childPrivacy
 }
 
-class PrivacyViewModel: ViewModelType {
+class PrivacyViewModel: ViewModelProjectType {
     struct Input {
         /// 隐私协议点击
         let privacy: AnyObserver<PrivacyType>

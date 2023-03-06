@@ -11,9 +11,14 @@ import UIKit
 struct LayoutConstantConfig
 {
     /// 屏幕宽度
-    static let screenWidth = UIScreen.main.bounds.size.width
+    static var screenWidth: CGFloat {
+        UIScreen.main.bounds.size.width
+    }
     /// 屏幕高度
-    static let screenHeight = UIScreen.main.bounds.size.height
+    static var screenHeight: CGFloat
+    {
+        UIScreen.main.bounds.size.height
+    }
     /// 状态栏高度
     static var statusBarHeight: CGFloat{
         if #available(iOS 15.0, *)
@@ -78,10 +83,18 @@ struct UserInfoConstantConfig {
     }
 }
 
+/// App常量信息
+struct AppInfoConstantConfig {
+    
+    /// 非首次安装(卸载重新安装默认为首次安装)默认为false,即为首次安装
+    static var isNotFirstInstall: Bool{
+        UserDefaults.standard.bool(forKey: "firstInstall")
+    }
+}
+
 /// 第三方库授权常量
 struct AuthorConstConfig
 {
-    
     /// 微信平台appid
     static let wxAppid = "wxf2f15e0298ede2f9"
     static let wxsecret = "13d141773bab3ad7d74fc5fc5e764283"

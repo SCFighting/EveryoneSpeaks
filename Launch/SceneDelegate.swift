@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import CoreTelephony
 @available(iOS 13,*)
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    let cellular = CTCellularData()
     var window: UIWindow?
     static var shared: SceneDelegate? {
         return UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
@@ -19,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        Navigator.shared.initRootController(for: window)
+        Navigator.shared.setupFor(window: window)
+        LibManager.shared.setupFor(window: window)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -42,6 +46,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        NetworkMonitor.shared.becameActivite()
+        
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {

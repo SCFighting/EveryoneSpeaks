@@ -14,47 +14,42 @@ class LibManager: NSObject {
     static let shared = LibManager()
     /// 当前活跃窗口
     var activityWindow: UIWindow?
-    /// 默认为初始化第三方库
+    /// 默认未初始化第三方库
     var initCommenLibraryFinish = false
-    
+    /// 自动管理
     let disposbag = DisposeBag()
+    
+    
     
     //MARK: -- public func
     
-    /// 初始化基本元素(日志和网络监听)
+    /// 初始化libmanager
     /// - Parameter window: window
-    func setupBaseConfig(window: UIWindow?){
+    func setupFor(window: UIWindow?){
         activityWindow = window
+        
+        //初始化日志,并启用日志系统
         initDDLog()
-        NetworkMonitor.shared.starNetWorkMonitor()
-        NetworkMonitor.shared.networkStatus.observe(on: MainScheduler.asyncInstance).subscribe(onNext: { [self] status in
+        
+        // 订阅网络状态
+        NetworkMonitor.shared.networkStatus.subscribe(onNext: { [self] status in
             switch status
             {
             case .unknown:
-                DDLogError("当前网络状态未知")
-                break
-            case .restricted:
-                DDLogError("当前网络未授权")
-                
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: UInt64(0.5 * Double(NSEC_PER_SEC))), execute: DispatchWorkItem(block: { [self] in
-                    let alert = UIAlertController(title: nil, message: "前往打开网络权限", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "好的", style: .default,handler: { _ in
-                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-                    }))
-                    activityWindow?.rootViewController?.present(alert, animated: true)
-                }))
+                activityWindow?.makeToast("网络状态未知")
                 break
             case .notReachable:
-                DDLogError("当前网络不可用")
-                activityWindow?.makeToast("当前网络不可用")
+                activityWindow?.makeToast("网络未连接")
                 break
-            case .reachable(netType: let netType):
-                activityWindow?.rootViewController?.presentedViewController?.dismiss(animated: false)
-                activityWindow?.makeToast("切换至\(netType)")
+            case .reachable(netType: let str):
+                activityWindow?.makeToast("已连接到\(str)")
                 setupPrivacyAndSDK()
-                break
             }
         }).disposed(by: disposbag)
+        
+        //监听网络
+        NetworkMonitor.shared.starNetWorkMonitor()
+        
     }
         
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -69,6 +64,10 @@ class LibManager: NSObject {
             WXApi.handleOpenUniversalLink(userActivity, delegate: self)
         }
         return true
+    }
+    
+    deinit {
+        print("ssssssssssssss")
     }
     
     //MARK: -- private func
@@ -195,9 +194,5 @@ extension LibManager: WXApiDelegate
     
     func onReq(_ req: BaseReq) {
         print("接收到微信消息=\(req)")
-    }
-    
-    func onNeedGrantReadPasteBoardPermission(with openURL: URL, completion: @escaping WXGrantReadPasteBoardPermissionCompletion) {
-        
     }
 }

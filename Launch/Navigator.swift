@@ -14,12 +14,11 @@ class Navigator: NSObject {
     
     /// 为window初始化根控制器
     /// - Parameter window: window
-    func initRootController(for window: UIWindow?){
+    func setupFor(window: UIWindow?){
         guard let window else {
             return
         }
         avtivityWindow = window
-        LibManager.shared.setupBaseConfig(window: window)
         changeRootViewController()
     }
     

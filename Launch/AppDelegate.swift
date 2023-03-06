@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         window = UIWindow(frame: .init(x: 0, y: 0, width:LayoutConstantConfig.screenWidth , height: LayoutConstantConfig.screenHeight))
-        Navigator.shared.initRootController(for: window)
+        Navigator.shared.setupFor(window: window)
+        LibManager.shared.setupFor(window: window)
         return true
     }
     
@@ -34,6 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         return LibManager.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        
     }
 }
 

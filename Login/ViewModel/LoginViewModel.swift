@@ -4,7 +4,7 @@
 //
 //  Created by 孙超 on 2023/2/8.
 //
-final class LoginViewModel: ViewModelType
+final class LoginViewModel: ViewModelProjectType
 {
     /// 微信授权model
     static var accessModel = WechatAccessModel()
@@ -45,7 +45,7 @@ final class LoginViewModel: ViewModelType
             else
             {
                 DDLogError("发起微信授权请求失败,网络不可达")
-                LibManager.shared.activityWindow?.makeToast("网络不可达")
+                LibManager.shared.activityWindow?.makeToast("网络不可用,请检查网络")
             }
         }).flatMapLatest({ _ ->Observable<Result<String,CustomError>> in  //监听微信授权回调通知
             let notificationResult = Observable.create { observer in
