@@ -11,6 +11,7 @@ import ActiveLabel
 class PrivacyView: BaseView {
 
     let viewModel = PrivacyViewModel()
+    
     let disposBag = DisposeBag()
     override init() {
         super.init()
@@ -63,66 +64,61 @@ class PrivacyView: BaseView {
     }
     
     func bindModel() {
-        self.confirmButton.rx.tap.bind(to: viewModel.input.confirm).disposed(by: disposBag)
-        self.refuseButton.rx.tap.bind(to: viewModel.input.refuse).disposed(by: disposBag)
-        viewModel.output.privacy.subscribe(onNext: {type in
-            switch type
-            {
-            case .userPrivacy:
-                DDLogDebug("用户协议")
-                
-                break
-            case .privacyPolicy:
-                DDLogDebug("隐私协议")
-                break
-            case .childPrivacy:
-                DDLogDebug("儿童隐私协议")
-                break
+ 
+        let userPrivacy = Observable.create { observer in
+            self.activityLabel.handleCustomTap(for: ActiveType.custom(pattern: "《人人讲用户协议》")) { str in
+                observer.onNext(str)
+            }
+            return Disposables.create()
+        }
+        let privacyPolicy = Observable.create { observer in
+            self.activityLabel.handleCustomTap(for: ActiveType.custom(pattern: "《人人讲隐私政策》")) { str in
+                observer.onNext(str)
+            }
+            return Disposables.create()
+        }
+        let childPrivacy = Observable.create { observer in
+            self.activityLabel.handleCustomTap(for: ActiveType.custom(pattern: "《儿童|青少年个人信息保护法规》")) { str in
+                observer.onNext(str)
+            }
+            return Disposables.create()
+        }
+        let output = viewModel.transform(input: PrivacyViewModel.Input(userPrivacy: userPrivacy, privacyPolicy: privacyPolicy, childPrivacy: childPrivacy, confirm: self.confirmButton.rx.tap, refuse: self.refuseButton.rx.tap))
+        output.protocolText.bind(to: self.activityLabel.rx.text).disposed(by: disposBag)
+        output.title.bind(to: self.titleLabel.rx.text).disposed(by: disposBag)
+        output.userPrivacy.subscribe(onNext: {(str) in
+            DDLogDebug("str = \(str)")
+        }).disposed(by: disposBag)
+        output.privacyPolicy.subscribe(onNext: {(str) in
+            DDLogDebug("str = \(str)")
+        }).disposed(by: disposBag)
+        output.childPrivacy.subscribe(onNext: {(str) in
+            DDLogDebug("str = \(str)")
+        }).disposed(by: disposBag)
+        
+        output.refuse.subscribe(onNext: { [self] in
+            UIView.transition(with: containerView, duration: 0.3,options: .curveEaseInOut) { [self] in
+                containerView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                confirmButton.setTitle("同意并继续", for: .normal)
+                refuseButton.setTitle("放弃使用", for: .normal)
+            }
+            UIView.animate(withDuration: 0.3, delay: 0.3) { [self] in
+                containerView.transform = CGAffineTransform(scaleX: 1, y: 1)
             }
         }).disposed(by: disposBag)
-        viewModel.output.confirm.subscribe(onNext: {
-            DDLogDebug("用户同意")
-            UIView.transition(with: self, duration: 0.3) {
-                self.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-            } completion: { finish in
-                if finish
-                {
-                    self.removeFromSuperview()
-                }
-            }
-            UserDefaults.standard.set(true, forKey: "showPrivacy")
-            UserDefaults.standard.synchronize()
+        
+        
+       
+        output.userPrivacy.subscribe { str in
+            DDLogDebug("str= \(str)")
+        }.disposed(by: disposBag)
+        output.privacyPolicy.subscribe { str in
+            DDLogDebug("str= \(str)")
+        }.disposed(by: disposBag)
+        output.childPrivacy.subscribe { str in
+            DDLogDebug("str= \(str)")
+        }.disposed(by: disposBag)
 
-        }).disposed(by: disposBag)
-        viewModel.output.refuse.subscribe(onNext: { [self] in
-            DDLogDebug("用户不同意")
-            if refuseButton.titleLabel?.text == "放弃使用"
-            {
-                exit(0)
-            }
-            else
-            {
-                UIView.transition(with: containerView, duration: 0.3,options: .curveEaseInOut) { [self] in
-                    containerView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-                    titleLabel.text = "温馨提示"
-                    let customTypeOne = ActiveType.custom(pattern: "《人人讲用户协议》")
-                    let customTypeTwo = ActiveType.custom(pattern: "《人人讲隐私政策》")
-                    let customTypeThree = ActiveType.custom(pattern: "《儿童|青少年个人信息保护法规》")
-                    activityLabel.enabledTypes = [customTypeOne,customTypeTwo,customTypeThree]
-                    activityLabel.lineSpacing = 5
-                    activityLabel.text = """
-                                 如果您不同意《人人讲用户协议》和《人人讲隐私政策》以及《儿童|青少年个人信息保护法规》,很遗憾我们将无法为您提供服务,你需要同意以上协议后,才能使用人人讲
-                                 我们将严格按照相关法律法规要求,坚决保障您的个人隐私和信息安全
-                                 """
-                    confirmButton.setTitle("同意并继续", for: .normal)
-                    refuseButton.setTitle("放弃使用", for: .normal)
-                }
-                UIView.animate(withDuration: 0.3, delay: 0.3) { [self] in
-                    containerView.transform = CGAffineTransform(scaleX: 1, y: 1)
-                }
-            }
-            
-        }).disposed(by: disposBag)
     }
     
     override func layoutSubviews() {
@@ -154,7 +150,6 @@ class PrivacyView: BaseView {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "个人信息保护提示"
         label.textColor = .init(hexString: "#202020")
         label.font = .systemFont(ofSize: 18, weight: .medium)
         return label
@@ -173,41 +168,12 @@ class PrivacyView: BaseView {
         let customTypeThree = ActiveType.custom(pattern: "《儿童|青少年个人信息保护法规》")
         label.enabledTypes = [customTypeOne,customTypeTwo,customTypeThree]
         label.lineSpacing = 5
-        label.text = """
-                     欢迎来到人人讲!
-                     我们将通过《人人讲用户协议》和《人人讲隐私政策》,帮助您了解我们为您提供的服务,我们如何处理个人信息以及您享有的权利.我们会严格按照相关法律法规要求,
-                     采取各种安全措施来保护您的个人信息.我们重视青少年|儿童的个人信息保护,若您是未满18周岁的未成年人,请在监护人的指导下阅读并同意以上协议以及《儿童|青少年个人信息保护法规》.
-                     点击"同意"按钮,表示您已知情以上协议和以下约定
-                     1. 为了保障软件的安全运行和账户安全,我们会申请收集您的设备信息,IP地址,MAC地址
-                     2. 上传或拍摄图片,视频,需要使用您的存储,相机麦克风权限
-                     3. 我们可能会申请位置权限,用于为您推荐您可能感兴趣的内容
-                     4. 为了帮助你发现更多朋友,我们会申请通讯录权限
-                     5. 我们尊重您的选择,你可以访问,修改,删除您的个人信息并管理您的授权,我们也为您提供注销,投诉渠道
-                     """
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 12, weight: .regular)
         label.customColor[customTypeOne] = .init(hexString: "#F4350B")
         label.customColor[customTypeTwo] = .init(hexString: "#F4350B")
         label.customColor[customTypeThree] = .init(hexString: "#F4350B")
         label.textColor = .init(hexString: "#000000")
-        label.handleCustomTap(for: customTypeOne) { [self] _ in
-            Observable.create { observer in
-                observer.onNext(PrivacyType.userPrivacy)
-                return Disposables.create()
-            }.bind(to: viewModel.input.privacy).disposed(by: disposBag)
-        }
-        label.handleCustomTap(for: customTypeTwo) { [self] _ in
-            Observable.create { observer in
-                observer.onNext(PrivacyType.privacyPolicy)
-                return Disposables.create()
-            }.bind(to: viewModel.input.privacy).disposed(by: disposBag)
-        }
-        label.handleCustomTap(for: customTypeThree) { [self] _ in
-            Observable.create { observer in
-                observer.onNext(PrivacyType.childPrivacy)
-                return Disposables.create()
-            }.bind(to: viewModel.input.privacy).disposed(by: disposBag)
-        }
         return label
     }()
     

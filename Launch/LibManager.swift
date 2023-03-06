@@ -88,16 +88,19 @@ class LibManager: NSObject {
     {
         if initCommenLibraryFinish == false
         {
+            initCommenLibraryFinish = true
             initCommenLibrary()
-        }
-        if UserInfoConstantConfig.showPrivacy == false,let activityWindow
-        {
-            let privacyView = PrivacyView()
-            activityWindow.addSubview(privacyView)
-            privacyView.snp.makeConstraints { make in
-                make.edges.equalTo(activityWindow)
+            
+            if UserInfoConstantConfig.showPrivacy == false,let activityWindow
+            {
+                let privacyView = PrivacyView()
+                activityWindow.addSubview(privacyView)
+                privacyView.snp.makeConstraints { make in
+                    make.edges.equalTo(activityWindow)
+                }
             }
         }
+        
     }
     
     
