@@ -106,19 +106,6 @@ class PrivacyView: BaseView {
                 containerView.transform = CGAffineTransform(scaleX: 1, y: 1)
             }
         }).disposed(by: disposBag)
-        
-        
-       
-        output.userPrivacy.subscribe { str in
-            DDLogDebug("str= \(str)")
-        }.disposed(by: disposBag)
-        output.privacyPolicy.subscribe { str in
-            DDLogDebug("str= \(str)")
-        }.disposed(by: disposBag)
-        output.childPrivacy.subscribe { str in
-            DDLogDebug("str= \(str)")
-        }.disposed(by: disposBag)
-
     }
     
     override func layoutSubviews() {
