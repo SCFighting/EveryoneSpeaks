@@ -78,7 +78,7 @@ class PrivacyView: BaseView {
             return Disposables.create()
         }
         let childPrivacy = Observable.create { observer in
-            self.activityLabel.handleCustomTap(for: ActiveType.custom(pattern: "《儿童|青少年个人信息保护法规》")) { str in
+            self.activityLabel.handleCustomTap(for: ActiveType.custom(pattern: "《儿童及青少年个人信息保护法规》")) { str in
                 observer.onNext(str)
             }
             return Disposables.create()
@@ -152,7 +152,7 @@ class PrivacyView: BaseView {
         let label = ActiveLabel()
         let customTypeOne = ActiveType.custom(pattern: "《人人讲用户协议》")
         let customTypeTwo = ActiveType.custom(pattern: "《人人讲隐私政策》")
-        let customTypeThree = ActiveType.custom(pattern: "《儿童|青少年个人信息保护法规》")
+        let customTypeThree = ActiveType.custom(pattern: "《儿童及青少年个人信息保护法规》")
         label.enabledTypes = [customTypeOne,customTypeTwo,customTypeThree]
         label.lineSpacing = 5
         label.numberOfLines = 0
