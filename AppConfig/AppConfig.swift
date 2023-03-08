@@ -81,6 +81,10 @@ struct UserInfoConstantConfig {
     static var showPrivacy: Bool{
         UserDefaults.standard.bool(forKey: "showPrivacy")
     }
+    static var currentUserID: Int
+    {
+        UserDefaults.standard.integer(forKey: "user_id")
+    }
 }
 
 /// App常量信息

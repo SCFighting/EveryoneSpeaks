@@ -15,6 +15,15 @@ enum Service {
     case wechatUserInfo(accessToken: String, openid: String)
     /// 三方平台授权登录
     case authLogin(app: String, nickname: String?, uuid: String?, openid: String?, accessToken: String?)
+    
+    //MARK: -- 系统开关配置
+    /// 开关查询
+    case systemSwitchConfig(include: String)
+    
+    //MARK: -- 首页相关api
+    /// 频道分类
+    case channelClassification
+    
 }
 
 extension Service: TargetType
@@ -24,8 +33,9 @@ extension Service: TargetType
         {
         case .wechatAccessToken(_, _, _, _), .wechatUserInfo(accessToken: _ , openid: _ ):
             return URL(string: "https://api.weixin.qq.com")!
-        case .authLogin(app: _, nickname: _, uuid: _, openid: _, accessToken: _):
+        default:
             return URL(string: "https://api.renrenjiang.cn")!
+            break
         }
     }
     
@@ -38,13 +48,19 @@ extension Service: TargetType
             return "/sns/userinfo"
         case .authLogin(app: _, nickname: _, uuid: _, openid: _, accessToken: _ ):
             return "/api/v3/account/apple/auth"
+            
+        case .systemSwitchConfig(include: _):
+            return "/api/v3/system/switch"
+            
+        case .channelClassification:
+            return "/api/v3/channels/list"
         }
     }
     
     var method: Moya.Method {
         switch self
         {
-        case .wechatAccessToken(_, _ , _ , _), .wechatUserInfo(accessToken: _ , openid: _ ):
+        case .wechatAccessToken(_, _ , _ , _), .wechatUserInfo(accessToken: _ , openid: _ ) , .systemSwitchConfig(include: _) , .channelClassification:
             return .get
         case .authLogin(app: _, nickname: _, uuid: _, openid: _, accessToken: _):
             return .post
@@ -81,6 +97,12 @@ extension Service: TargetType
             }
             parameters["version"] = "4.2.50"
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+            
+        case let .systemSwitchConfig(include):
+            return .requestParameters(parameters: ["include":include,"user_id":UserInfoConstantConfig.currentUserID], encoding: URLEncoding.queryString)
+            
+        case.channelClassification:
+            return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
         }
     }
     

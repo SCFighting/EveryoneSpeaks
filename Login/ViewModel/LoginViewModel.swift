@@ -127,6 +127,7 @@ final class LoginViewModel: ViewModelProjectType
                             {
                                 UserDefaults.standard.set(appInfo.token?.id, forKey: UserInfoConstantConfig.token)
                                 UserDefaults.standard.set(appInfo.token?.exp, forKey: UserInfoConstantConfig.tokenDeadLine)
+                                UserDefaults.standard.set(appInfo.user.user_id, forKey: "user_id")
                                 UserDefaults.standard.synchronize()
                                 observer.onNext(Result<AppLoginInfoModel?,CustomError>.success(appInfo))
                             }

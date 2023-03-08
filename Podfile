@@ -6,7 +6,8 @@ target 'EveryoneSpeaks' do
   use_frameworks!
 
   pod 'SnapKit'
-  pod 'KakaJSON', '~> 1.1.2' 
+  pod 'KakaJSON', '~> 1.1.2'
+  pod 'RxKakaJSON', :git => 'git@github.com:SCFighting/RxKakaJSON.git'
   pod 'CocoaLumberjack/Swift'
   pod 'Moya/RxSwift', '~> 15.0'
   pod 'RxSwift', '6.5.0'
@@ -17,7 +18,7 @@ target 'EveryoneSpeaks' do
   pod 'ActiveLabel'
   pod 'RAMAnimatedTabBarController'
   pod 'RTRootNavigationController'
-  pod 'RxKakaJSON', :git => 'git@github.com:SCFighting/RxKakaJSON.git'
+  pod 'JXPagingView/Paging'
   pod 'WechatOpenSDK'
   post_install do |installer|
     installer.pods_project.build_configurations.each do |config|
