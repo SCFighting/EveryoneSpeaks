@@ -42,7 +42,7 @@ class NetworkMonitor {
                 networkStatus.onNext(NetWorkStatus.notReachable)
                 break
             case .reachable(let type):
-                DDLogDebug("网络已联通")
+                DDLogDebug("网络已连通")
                 networkEnable = true
                 switch type
                 {
@@ -71,7 +71,7 @@ class NetworkMonitor {
             networkStatus.onNext(NetWorkStatus.notReachable)
             break
         case .reachable(let type):
-            DDLogDebug("网络已联通")
+            DDLogDebug("网络已连通")
             networkEnable = true
             switch type
             {
