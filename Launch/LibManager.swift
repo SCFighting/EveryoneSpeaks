@@ -32,7 +32,7 @@ class LibManager: NSObject {
         initDDLog()
         
         // 订阅网络状态
-        NetworkMonitor.shared.networkStatus.subscribe(onNext: { [self] status in
+        NetworkMonitor.shared.networkStatus.skip(1).subscribe(onNext: { [self] status in
             switch status
             {
             case .unknown:

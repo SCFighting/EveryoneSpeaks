@@ -1,17 +1,31 @@
 //
-//  HomeController.swift
+//  ViewController.swift
 //  EveryoneSpeaks
 //
-//  Created by SC on 2023/2/28.
+//  Created by SC on 2023/3/8.
 //
 
 import UIKit
 
-class HomeController: BaseController {
+class ViewController: PresentController {
 
+    override init() {
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = .clear
+        let tt = UIView()
+        tt.backgroundColor = .red
+        view.addSubview(tt)
+        tt.snp.makeConstraints { make in
+            make.left.right.bottom.equalTo(view)
+            make.height.equalTo(400)
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -25,11 +39,5 @@ class HomeController: BaseController {
         // Pass the selected object to the new view controller.
     }
     */
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        let vc = ViewController()
-        self.present(vc, animated: true)
-    }
 
 }

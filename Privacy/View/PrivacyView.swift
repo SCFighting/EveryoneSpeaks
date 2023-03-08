@@ -106,6 +106,18 @@ class PrivacyView: BaseView {
                 containerView.transform = CGAffineTransform(scaleX: 1, y: 1)
             }
         }).disposed(by: disposBag)
+        output.confirm.subscribe(onNext: { [self] in
+            UIView.transition(with: containerView, duration: 0.3) { [self] in
+                containerView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                UserDefaults.standard.set(true, forKey: "showPrivacy")
+                UserDefaults.standard.synchronize()
+            } completion: { complate in
+                if complate
+                {
+                    self.removeFromSuperview()
+                }
+            }
+        }).disposed(by: disposBag)
     }
     
     override func layoutSubviews() {
