@@ -34,7 +34,6 @@
 		5282EE87299B5903005710F2 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282EE86299B5903005710F2 /* APIServices.swift */; };
 		52BD302D29B82B4A0002DB8F /* PresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD302C29B82B4A0002DB8F /* PresentAnimator.swift */; };
 		52BD302F29B82CA60002DB8F /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD302E29B82CA60002DB8F /* PresentationController.swift */; };
-		52BD303129B859400002DB8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD303029B859400002DB8F /* ViewController.swift */; };
 		52BD303329B86D450002DB8F /* PresentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD303229B86D450002DB8F /* PresentController.swift */; };
 		52E4F1022993803700A8FE32 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4F1012993803700A8FE32 /* ViewModelProtocol.swift */; };
 		52E4F1052993812F00A8FE32 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4F1042993812F00A8FE32 /* LoginViewModel.swift */; };
@@ -75,7 +74,6 @@
 		5282EE86299B5903005710F2 /* APIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
 		52BD302C29B82B4A0002DB8F /* PresentAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAnimator.swift; sourceTree = "<group>"; };
 		52BD302E29B82CA60002DB8F /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
-		52BD303029B859400002DB8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		52BD303229B86D450002DB8F /* PresentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentController.swift; sourceTree = "<group>"; };
 		52E4F1012993803700A8FE32 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		52E4F1042993812F00A8FE32 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 				524DE4E829AE234C008D1A8A /* HomeController.swift */,
 				524DE4EA29AE2361008D1A8A /* MineController.swift */,
 				524DE4EC29AE2598008D1A8A /* RootController.swift */,
-				52BD303029B859400002DB8F /* ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -471,7 +468,6 @@
 				52E4F1052993812F00A8FE32 /* LoginViewModel.swift in Sources */,
 				524DE4CB29A85EA7008D1A8A /* BaseModel.swift in Sources */,
 				524DE4D629AC84B3008D1A8A /* UserInfoModel.swift in Sources */,
-				52BD303129B859400002DB8F /* ViewController.swift in Sources */,
 				52E4F1022993803700A8FE32 /* ViewModelProtocol.swift in Sources */,
 				52713F512990DDF600BA8D11 /* AppDelegate.swift in Sources */,
 				524DE4C629A5B952008D1A8A /* WechatAccessModel.swift in Sources */,
