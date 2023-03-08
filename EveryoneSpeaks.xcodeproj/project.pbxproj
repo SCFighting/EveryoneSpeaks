@@ -19,7 +19,6 @@
 		524DE4E329ADCD6E008D1A8A /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4E229ADCD6E008D1A8A /* GradientView.swift */; };
 		524DE4E529ADE1D2008D1A8A /* PrivacyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4E429ADE1D2008D1A8A /* PrivacyViewModel.swift */; };
 		524DE4E729AE1AD2008D1A8A /* MainLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4E629AE1AD2008D1A8A /* MainLoginView.swift */; };
-		524DE4E929AE234C008D1A8A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4E829AE234C008D1A8A /* HomeController.swift */; };
 		524DE4EB29AE2361008D1A8A /* MineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4EA29AE2361008D1A8A /* MineController.swift */; };
 		524DE4ED29AE2598008D1A8A /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4EC29AE2598008D1A8A /* RootController.swift */; };
 		524DE4F229B1C1D0008D1A8A /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 524DE4F129B1C1D0008D1A8A /* NetworkMonitor.swift */; };
@@ -35,6 +34,8 @@
 		52BD302D29B82B4A0002DB8F /* PresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD302C29B82B4A0002DB8F /* PresentAnimator.swift */; };
 		52BD302F29B82CA60002DB8F /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD302E29B82CA60002DB8F /* PresentationController.swift */; };
 		52BD303329B86D450002DB8F /* PresentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD303229B86D450002DB8F /* PresentController.swift */; };
+		52BD303B29B898940002DB8F /* ChannelClassificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD303A29B898940002DB8F /* ChannelClassificationModel.swift */; };
+		52BD303C29B899590002DB8F /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD303729B898470002DB8F /* HomeController.swift */; };
 		52E4F1022993803700A8FE32 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4F1012993803700A8FE32 /* ViewModelProtocol.swift */; };
 		52E4F1052993812F00A8FE32 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4F1042993812F00A8FE32 /* LoginViewModel.swift */; };
 		8837D74647BB43EB020835F1 /* Pods_EveryoneSpeaks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5873A06DE559ED7D90DAD213 /* Pods_EveryoneSpeaks.framework */; };
@@ -57,7 +58,6 @@
 		524DE4E229ADCD6E008D1A8A /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		524DE4E429ADE1D2008D1A8A /* PrivacyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewModel.swift; sourceTree = "<group>"; };
 		524DE4E629AE1AD2008D1A8A /* MainLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLoginView.swift; sourceTree = "<group>"; };
-		524DE4E829AE234C008D1A8A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		524DE4EA29AE2361008D1A8A /* MineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineController.swift; sourceTree = "<group>"; };
 		524DE4EC29AE2598008D1A8A /* RootController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
 		524DE4F129B1C1D0008D1A8A /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
@@ -75,6 +75,8 @@
 		52BD302C29B82B4A0002DB8F /* PresentAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAnimator.swift; sourceTree = "<group>"; };
 		52BD302E29B82CA60002DB8F /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		52BD303229B86D450002DB8F /* PresentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentController.swift; sourceTree = "<group>"; };
+		52BD303729B898470002DB8F /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		52BD303A29B898940002DB8F /* ChannelClassificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelClassificationModel.swift; sourceTree = "<group>"; };
 		52E4F1012993803700A8FE32 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		52E4F1042993812F00A8FE32 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		5873A06DE559ED7D90DAD213 /* Pods_EveryoneSpeaks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EveryoneSpeaks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,7 +148,6 @@
 		524DE4D729ACAA2A008D1A8A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				524DE4E829AE234C008D1A8A /* HomeController.swift */,
 				524DE4EA29AE2361008D1A8A /* MineController.swift */,
 				524DE4EC29AE2598008D1A8A /* RootController.swift */,
 			);
@@ -189,17 +190,18 @@
 		52713F242990DB7000BA8D11 = {
 			isa = PBXGroup;
 			children = (
-				524DE4D829AD9822008D1A8A /* Privacy */,
-				524DE4BA29A4CCF3008D1A8A /* EveryoneSpeaks.entitlements */,
-				52713F5D2992470900BA8D11 /* Base */,
 				52713F582991F26600BA8D11 /* AppConfig */,
+				52713F5D2992470900BA8D11 /* Base */,
+				524DE4BA29A4CCF3008D1A8A /* EveryoneSpeaks.entitlements */,
+				0847F2DFFDEC30B2E5B4199D /* Frameworks */,
+				52BD303429B898470002DB8F /* Home */,
 				52713F442990DDF600BA8D11 /* Launch */,
 				52713F4F2990DDF600BA8D11 /* Login */,
+				E09A6CEF6784279A83472E25 /* Pods */,
+				524DE4D829AD9822008D1A8A /* Privacy */,
+				52713F2E2990DB7000BA8D11 /* Products */,
 				52713F472990DDF600BA8D11 /* Resource */,
 				52713F4E2990DDF600BA8D11 /* Root */,
-				52713F2E2990DB7000BA8D11 /* Products */,
-				E09A6CEF6784279A83472E25 /* Pods */,
-				0847F2DFFDEC30B2E5B4199D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -316,6 +318,47 @@
 				52BD303229B86D450002DB8F /* PresentController.swift */,
 			);
 			path = Animation;
+			sourceTree = "<group>";
+		};
+		52BD303429B898470002DB8F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				52BD303529B898470002DB8F /* ViewModel */,
+				52BD303629B898470002DB8F /* Controller */,
+				52BD303829B898470002DB8F /* Model */,
+				52BD303929B898470002DB8F /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		52BD303529B898470002DB8F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		52BD303629B898470002DB8F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				52BD303729B898470002DB8F /* HomeController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		52BD303829B898470002DB8F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				52BD303A29B898940002DB8F /* ChannelClassificationModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		52BD303929B898470002DB8F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		52E4F1032993811900A8FE32 /* ViewModel */ = {
@@ -449,13 +492,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52BD303C29B899590002DB8F /* HomeController.swift in Sources */,
 				524DE4E329ADCD6E008D1A8A /* GradientView.swift in Sources */,
 				52BD303329B86D450002DB8F /* PresentController.swift in Sources */,
 				52713F5A2991F2BE00BA8D11 /* AppConfig.swift in Sources */,
 				52BD302F29B82CA60002DB8F /* PresentationController.swift in Sources */,
-				524DE4E929AE234C008D1A8A /* HomeController.swift in Sources */,
 				52713F662992489800BA8D11 /* LoginController.swift in Sources */,
 				524DE4E529ADE1D2008D1A8A /* PrivacyViewModel.swift in Sources */,
+				52BD303B29B898940002DB8F /* ChannelClassificationModel.swift in Sources */,
 				524DE4D229A86579008D1A8A /* BaseExtension.swift in Sources */,
 				52713F5C299242E900BA8D11 /* Navigator.swift in Sources */,
 				524DE4BC29A4E70F008D1A8A /* LibManager.swift in Sources */,
