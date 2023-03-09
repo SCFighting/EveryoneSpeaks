@@ -23,6 +23,8 @@ enum Service {
     //MARK: -- 首页相关api
     /// 频道分类
     case channelClassification
+    /// 频道下推荐的课程
+    case recommentActivityForChannel(channel_id: Int, parameters: [String:Any]?)
     
 }
 
@@ -54,13 +56,19 @@ extension Service: TargetType
             
         case .channelClassification:
             return "/api/v3/channels/list"
+        case let .recommentActivityForChannel(channel_id, _):
+            return "/api/v3/channels/\(channel_id)/activities"
         }
     }
     
     var method: Moya.Method {
         switch self
         {
-        case .wechatAccessToken(_, _ , _ , _), .wechatUserInfo(accessToken: _ , openid: _ ) , .systemSwitchConfig(include: _) , .channelClassification:
+        case .wechatAccessToken(_, _ , _ , _),
+            .wechatUserInfo(accessToken: _ , openid: _ ),
+            .systemSwitchConfig(include: _),
+            .channelClassification,
+            .recommentActivityForChannel(channel_id: _, parameters: _):
             return .get
         case .authLogin(app: _, nickname: _, uuid: _, openid: _, accessToken: _):
             return .post
@@ -101,8 +109,10 @@ extension Service: TargetType
         case let .systemSwitchConfig(include):
             return .requestParameters(parameters: ["include":include,"user_id":UserInfoConstantConfig.currentUserID], encoding: URLEncoding.queryString)
             
-        case.channelClassification:
+        case .channelClassification:
             return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
+        case let .recommentActivityForChannel(_, parameters):
+            return .requestParameters(parameters: parameters ?? [:], encoding: URLEncoding.queryString)
         }
     }
     

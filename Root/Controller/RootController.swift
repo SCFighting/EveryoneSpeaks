@@ -12,6 +12,20 @@ class RootController: RAMAnimatedTabBarController {
     override func loadView() {
         super.loadView()
         addAllChildsControllors()
+        if #available(iOS 13.0, *) {
+            let app = UITabBarAppearance()
+            app.backgroundImage = UIImage(named: "nav_background")?.resizableImage(withCapInsets: .zero,resizingMode: .stretch)
+            self.tabBar.standardAppearance = app
+            if #available(iOS 15.0, *) {
+                self.tabBar.scrollEdgeAppearance = app
+            } else {
+                // Fallback on earlier versions
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        
+//        self.tabBar.backgroundImage =
     }
     
     ///添加所有的子控制器

@@ -22,6 +22,8 @@ class Config: BaseModel {
 class UserInfoModel: BaseModel {
     
     var user_id = 0
+    var avatar = ""
+    var nickname = ""
 }
 
 class AppLoginInfoModel: BaseModel {

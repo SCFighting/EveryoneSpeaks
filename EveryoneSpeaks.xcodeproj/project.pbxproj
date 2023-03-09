@@ -37,6 +37,8 @@
 		52BD303B29B898940002DB8F /* ChannelClassificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD303A29B898940002DB8F /* ChannelClassificationModel.swift */; };
 		52BD303C29B899590002DB8F /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD303729B898470002DB8F /* HomeController.swift */; };
 		52BD303E29B89A880002DB8F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD303D29B89A880002DB8F /* HomeViewModel.swift */; };
+		52BD304029B9822D0002DB8F /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD303F29B9822D0002DB8F /* ActivityModel.swift */; };
+		52BD304229B9DAD50002DB8F /* HomeSubController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD304129B9DAD50002DB8F /* HomeSubController.swift */; };
 		52E4F1022993803700A8FE32 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4F1012993803700A8FE32 /* ViewModelProtocol.swift */; };
 		52E4F1052993812F00A8FE32 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E4F1042993812F00A8FE32 /* LoginViewModel.swift */; };
 		8837D74647BB43EB020835F1 /* Pods_EveryoneSpeaks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5873A06DE559ED7D90DAD213 /* Pods_EveryoneSpeaks.framework */; };
@@ -79,6 +81,8 @@
 		52BD303729B898470002DB8F /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		52BD303A29B898940002DB8F /* ChannelClassificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelClassificationModel.swift; sourceTree = "<group>"; };
 		52BD303D29B89A880002DB8F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		52BD303F29B9822D0002DB8F /* ActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
+		52BD304129B9DAD50002DB8F /* HomeSubController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSubController.swift; sourceTree = "<group>"; };
 		52E4F1012993803700A8FE32 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		52E4F1042993812F00A8FE32 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		5873A06DE559ED7D90DAD213 /* Pods_EveryoneSpeaks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EveryoneSpeaks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -345,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				52BD303729B898470002DB8F /* HomeController.swift */,
+				52BD304129B9DAD50002DB8F /* HomeSubController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -353,6 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				52BD303A29B898940002DB8F /* ChannelClassificationModel.swift */,
+				52BD303F29B9822D0002DB8F /* ActivityModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -504,7 +510,9 @@
 				524DE4E529ADE1D2008D1A8A /* PrivacyViewModel.swift in Sources */,
 				52BD303B29B898940002DB8F /* ChannelClassificationModel.swift in Sources */,
 				524DE4D229A86579008D1A8A /* BaseExtension.swift in Sources */,
+				52BD304229B9DAD50002DB8F /* HomeSubController.swift in Sources */,
 				52713F5C299242E900BA8D11 /* Navigator.swift in Sources */,
+				52BD304029B9822D0002DB8F /* ActivityModel.swift in Sources */,
 				524DE4BC29A4E70F008D1A8A /* LibManager.swift in Sources */,
 				52713F632992472400BA8D11 /* BaseController.swift in Sources */,
 				524DE4CF29A85F72008D1A8A /* CustomerError.swift in Sources */,

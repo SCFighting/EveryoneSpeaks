@@ -19,6 +19,7 @@ target 'EveryoneSpeaks' do
   pod 'RAMAnimatedTabBarController'
   pod 'RTRootNavigationController'
   pod 'JXPagingView/Paging'
+  pod 'JXSegmentedView'
   pod 'WechatOpenSDK'
   post_install do |installer|
     installer.pods_project.build_configurations.each do |config|
