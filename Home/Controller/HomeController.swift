@@ -27,11 +27,10 @@ class HomeController: BaseController {
     
     override func loadView() {
         super.loadView()
-        
         segmentedView.dataSource = segmentedDataSource
         segmentedView.delegate = self
         view.addSubview(segmentedView)
-
+        
         segmentedView.listContainer = listContainerView
         view.addSubview(listContainerView)
     }
@@ -39,31 +38,43 @@ class HomeController: BaseController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if #available(iOS 15.0, *) {
-                let appperance = UINavigationBarAppearance()
-                //添加背景色
+            let appperance = UINavigationBarAppearance()
+            //添加背景色
             appperance.backgroundColor = .clear
             appperance.backgroundImage = UIImage(named: "nav_background")?.resizableImage(withCapInsets: .zero,resizingMode: .stretch)
-                appperance.shadowImage = UIImage()
-                appperance.shadowColor = nil
-                //设置字体颜色大小
-                appperance.titleTextAttributes = [
-                    .foregroundColor: UIColor.white
-                ]
-                navigationController?.navigationBar.standardAppearance = appperance
-                navigationController?.navigationBar.scrollEdgeAppearance = appperance
-                navigationController?.navigationBar.compactAppearance = appperance
-                navigationController?.navigationBar.compactScrollEdgeAppearance = appperance
-            }
-        let backImage = UIImage(named: "nav_background")?.resizableImage(withCapInsets: .zero,resizingMode: .stretch)
-        self.rt_navigationController.navigationBar.setBackgroundImage(backImage, for: .default)
-        self.navigationController?.navigationBar.alpha = 1
+            appperance.shadowImage = UIImage()
+            appperance.shadowColor = nil
+            //设置字体颜色大小
+            appperance.titleTextAttributes = [
+                .foregroundColor: UIColor.red,
+                .font: UIFont.systemFont(ofSize: 16)
+            ]
+            navigationController?.navigationBar.standardAppearance = appperance
+            navigationController?.navigationBar.scrollEdgeAppearance = appperance
+            navigationController?.navigationBar.compactAppearance = appperance
+            navigationController?.navigationBar.compactScrollEdgeAppearance = appperance
+//            navigationController?.navigationItem.hidesBackButton = false
+            title = "asjakljdak"
+//            navigationController?.navigationItem.backBarButtonItem =
+        }
+//        let backImage = UIImage(named: "nav_background")?.resizableImage(withCapInsets: .zero,resizingMode: .stretch)
+//        self.rt_navigationController.navigationBar.setBackgroundImage(backImage, for: .default)
+//        self.navigationController?.navigationBar.alpha = 1
         //处于第一个item的时候，才允许屏幕边缘手势返回
         navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "人人讲", style: .plain, target: nil, action: nil)
+        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:UIColor.red], for: .normal)
+//        self.navigationItem.leftBarButtonItem = false
+        
     }
-
+    
+    override func rt_customBackItem(withTarget target: Any!, action: Selector!) -> UIBarButtonItem! {
+        UIBarButtonItem(title: "人人讲", style: .plain, target: nil, action: nil)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         //离开页面的时候，需要恢复屏幕边缘手势，不能影响其他页面
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
@@ -81,7 +92,7 @@ class HomeController: BaseController {
             make.bottom.equalTo(view.snp.bottom).offset(-LayoutConstantConfig.tabBarFullHeight)
         }
     }
-
+    
     
     
     
@@ -93,10 +104,10 @@ class HomeController: BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-//        //图片拉伸，否则在某些机型导航栏图片是没有填满的
-//            UIImage *backImage = [[UIImage imageNamed:@"nav_background"] resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
-//            //设置导航栏背景图片
-//            [self.navigationBar setBackgroundImage:backImage forBarMetrics:UIBarMetricsDefault];
+        //        //图片拉伸，否则在某些机型导航栏图片是没有填满的
+        //            UIImage *backImage = [[UIImage imageNamed:@"nav_background"] resizableImageWithCapInsets:UIEdgeInsetsZero resizingMode:UIImageResizingModeStretch];
+        //            //设置导航栏背景图片
+        //            [self.navigationBar setBackgroundImage:backImage forBarMetrics:UIBarMetricsDefault];
     }
     
     
@@ -113,7 +124,7 @@ class HomeController: BaseController {
         }).disposed(by: disposbag)
         
         
-//        viewmodel.input.chan
+        //        viewmodel.input.chan
     }
     
 }
@@ -126,7 +137,7 @@ extension HomeController: JXSegmentedViewDelegate {
             //再调用reloadItem(at: index)
             segmentedView.reloadItem(at: index)
         }
-
+        
         navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
     }
 }
@@ -138,7 +149,7 @@ extension HomeController: JXSegmentedListContainerViewDataSource {
         }
         return 0
     }
-
+    
     func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
         return HomeSubController()
     }

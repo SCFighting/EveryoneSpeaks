@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         window = UIWindow(frame: .init(x: 0, y: 0, width:LayoutConstantConfig.screenWidth , height: LayoutConstantConfig.screenHeight))
         Navigator.shared.setupFor(window: window)
-        LibManager.shared.setupFor(window: window)
         return true
     }
     

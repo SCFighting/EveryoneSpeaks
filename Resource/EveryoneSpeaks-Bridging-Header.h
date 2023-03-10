@@ -9,5 +9,6 @@
 #define EveryoneSpeaks_Bridging_Header_h
 
 #import "WXApi.h"
+#import "RTRootNavigationController.h"
 
 #endif /* EveryoneSpeaks_Bridging_Header_h */
