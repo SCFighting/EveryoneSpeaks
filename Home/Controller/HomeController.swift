@@ -144,6 +144,6 @@ extension HomeController: JXSegmentedListContainerViewDataSource {
         {
             vc.channel_id = viewmodel.channelListArray![index].id
         }
-        return HomeSubController()
+        return vc
     }
 }
