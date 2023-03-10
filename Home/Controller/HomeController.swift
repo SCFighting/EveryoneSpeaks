@@ -53,23 +53,11 @@ class HomeController: BaseController {
             navigationController?.navigationBar.scrollEdgeAppearance = appperance
             navigationController?.navigationBar.compactAppearance = appperance
             navigationController?.navigationBar.compactScrollEdgeAppearance = appperance
-//            navigationController?.navigationItem.hidesBackButton = false
-            title = "asjakljdak"
-//            navigationController?.navigationItem.backBarButtonItem =
         }
-//        let backImage = UIImage(named: "nav_background")?.resizableImage(withCapInsets: .zero,resizingMode: .stretch)
-//        self.rt_navigationController.navigationBar.setBackgroundImage(backImage, for: .default)
-//        self.navigationController?.navigationBar.alpha = 1
         //处于第一个item的时候，才允许屏幕边缘手势返回
         navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "人人讲", style: .plain, target: nil, action: nil)
-        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:UIColor.red], for: .normal)
-//        self.navigationItem.leftBarButtonItem = false
-        
-    }
-    
-    override func rt_customBackItem(withTarget target: Any!, action: Selector!) -> UIBarButtonItem! {
-        UIBarButtonItem(title: "人人讲", style: .plain, target: nil, action: nil)
+        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:UIColor.red,NSAttributedString.Key.font:UIFont.systemFont(ofSize: 25, weight: .medium)], for: .normal)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -84,7 +72,7 @@ class HomeController: BaseController {
         segmentedView.snp.makeConstraints { make in
             make.left.right.equalTo(view)
             make.top.equalTo(view.snp.top).offset(LayoutConstantConfig.navigationFullHeight)
-            make.height.equalTo(30)
+            make.height.equalTo(40)
         }
         listContainerView.snp.makeConstraints { make in
             make.left.right.equalTo(view)
@@ -151,6 +139,11 @@ extension HomeController: JXSegmentedListContainerViewDataSource {
     }
     
     func listContainerView(_ listContainerView: JXSegmentedListContainerView, initListAt index: Int) -> JXSegmentedListContainerViewListDelegate {
+        let vc = HomeSubController()
+        if viewmodel.channelListArray != nil
+        {
+            vc.channel_id = viewmodel.channelListArray![index].id
+        }
         return HomeSubController()
     }
 }

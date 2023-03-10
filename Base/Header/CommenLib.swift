@@ -18,3 +18,4 @@ import Foundation
 @_exported import DynamicColor
 @_exported import CocoaLumberjack
 @_exported import SnapKit
+@_exported import SDWebImage

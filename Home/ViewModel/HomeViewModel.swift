@@ -27,8 +27,6 @@ final class HomeViewModel: ViewModelProjectType
     
     ///频道列表
     var channelListArray:[ChannelClassificationModel]?
-    ///课程列表
-    var activityArray:[ActivityModel]!
     
     
     init()
