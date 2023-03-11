@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeCell: UITableViewCell {
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(posterImageView)
@@ -35,7 +35,7 @@ class HomeCell: UITableViewCell {
         avatarImageView.snp.makeConstraints { make in
             make.left.equalTo(titleLabel)
             make.bottom.equalTo(posterImageView)
-            make.size.equalTo(CGSize(width: 24, height: 24))
+            make.size.equalTo(CGSize(width: 18, height: 18))
             make.top.equalTo(reservationLabel.snp.bottom)
         }
         nicknameLabel.snp.makeConstraints { make in
@@ -49,11 +49,21 @@ class HomeCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    lazy var viewmodel: HomeCellViewModel = {
+        let vm = HomeCellViewModel()
+        return vm
+    }()
+    
     lazy var posterImageView:UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        viewmodel.output.posterImage.bind(to: imageView.rx.image).disposed(by: disposbag)
         return imageView
+    }()
+    
+    lazy var disposbag: DisposeBag = {
+        DisposeBag()
     }()
     
     lazy var titleLabel: UILabel = {
@@ -63,6 +73,7 @@ class HomeCell: UITableViewCell {
         label.textAlignment = .left
         label.numberOfLines = 2
         label.setContentHuggingPriority(.required, for: .vertical)
+        viewmodel.output.title.bind(to: label.rx.text).disposed(by: disposbag)
         return label
     }()
     
@@ -72,6 +83,7 @@ class HomeCell: UITableViewCell {
         label.font = .systemFont(ofSize: 12, weight: .regular)
         label.textAlignment = .left
         label.numberOfLines = 1
+        viewmodel.output.reservation.bind(to: label.rx.text).disposed(by: disposbag)
         return label
     }()
     
@@ -79,8 +91,9 @@ class HomeCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 12
+        imageView.layer.cornerRadius = 9
         imageView.clipsToBounds = true
+        viewmodel.output.avatar.bind(to: imageView.rx.image).disposed(by: disposbag)
         return imageView
     }()
     
@@ -90,6 +103,7 @@ class HomeCell: UITableViewCell {
         label.font = .systemFont(ofSize: 12, weight: .regular)
         label.textAlignment = .left
         label.numberOfLines = 1
+        viewmodel.output.nickName.bind(to: label.rx.text).disposed(by: disposbag)
         return label
     }()
 

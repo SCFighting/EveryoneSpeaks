@@ -30,6 +30,7 @@
 		52713F5C299242E900BA8D11 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52713F5B299242E900BA8D11 /* Navigator.swift */; };
 		52713F632992472400BA8D11 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52713F622992472400BA8D11 /* BaseController.swift */; };
 		52713F662992489800BA8D11 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52713F652992489800BA8D11 /* LoginController.swift */; };
+		5275162429BC178B00341856 /* HomeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275162329BC178B00341856 /* HomeCellViewModel.swift */; };
 		5282EE87299B5903005710F2 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282EE86299B5903005710F2 /* APIServices.swift */; };
 		52BD302D29B82B4A0002DB8F /* PresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD302C29B82B4A0002DB8F /* PresentAnimator.swift */; };
 		52BD302F29B82CA60002DB8F /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD302E29B82CA60002DB8F /* PresentationController.swift */; };
@@ -76,6 +77,7 @@
 		52713F5B299242E900BA8D11 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		52713F622992472400BA8D11 /* BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
 		52713F652992489800BA8D11 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		5275162329BC178B00341856 /* HomeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellViewModel.swift; sourceTree = "<group>"; };
 		5282EE86299B5903005710F2 /* APIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
 		52BD302C29B82B4A0002DB8F /* PresentAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAnimator.swift; sourceTree = "<group>"; };
 		52BD302E29B82CA60002DB8F /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 			children = (
 				52BD303D29B89A880002DB8F /* HomeViewModel.swift */,
 				52BD304529BAFCC60002DB8F /* HomeSubViewModel.swift */,
+				5275162329BC178B00341856 /* HomeCellViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				52BD302F29B82CA60002DB8F /* PresentationController.swift in Sources */,
 				52713F662992489800BA8D11 /* LoginController.swift in Sources */,
 				524DE4E529ADE1D2008D1A8A /* PrivacyViewModel.swift in Sources */,
+				5275162429BC178B00341856 /* HomeCellViewModel.swift in Sources */,
 				52BD303B29B898940002DB8F /* ChannelClassificationModel.swift in Sources */,
 				524DE4D229A86579008D1A8A /* BaseExtension.swift in Sources */,
 				52BD304229B9DAD50002DB8F /* HomeSubController.swift in Sources */,

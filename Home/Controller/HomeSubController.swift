@@ -21,11 +21,7 @@ class HomeSubController: BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.output.dataSource.bind(to: tableView.rx.items(cellIdentifier: "HomeCell",cellType: HomeCell.self)){index,model,cell in
-            cell.posterImageView.sd_setImage(with: URL(string: model.background))
-            cell.titleLabel.text = model.title
-            cell.reservationLabel.text = "\(model.reservation_count)人订阅"
-            cell.avatarImageView.sd_setImage(with: URL(string: model.creator.avatar))
-            cell.nicknameLabel.text = model.creator.nickname
+            cell.viewmodel.input.activity.onNext(model)
         }.disposed(by: disposbag)
         viewModel.input.viewDidload.onNext(channel_id)
     }
