@@ -14,6 +14,7 @@ class HomeCell: UITableViewCell {
         contentView.addSubview(posterImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(reservationLabel)
+        contentView.addSubview(priceLabel)
         contentView.addSubview(avatarImageView)
         contentView.addSubview(nicknameLabel)
         selectionStyle = .none
@@ -29,8 +30,13 @@ class HomeCell: UITableViewCell {
             make.right.equalTo(contentView.snp.right).offset(-15)
         }
         reservationLabel.snp.makeConstraints { make in
-            make.left.right.equalTo(titleLabel)
+            make.left.equalTo(titleLabel)
+            make.right.equalTo(priceLabel.snp.left).offset(-5)
             make.top.equalTo(titleLabel.snp.bottom)
+        }
+        priceLabel.snp.makeConstraints { make in
+            make.right.equalTo(titleLabel)
+            make.centerY.equalTo(reservationLabel)
         }
         avatarImageView.snp.makeConstraints { make in
             make.left.equalTo(titleLabel)
@@ -58,6 +64,8 @@ class HomeCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 4.0
+        imageView.clipsToBounds = true
         viewmodel.output.posterImage.bind(to: imageView.rx.image).disposed(by: disposbag)
         return imageView
     }()
@@ -84,6 +92,17 @@ class HomeCell: UITableViewCell {
         label.textAlignment = .left
         label.numberOfLines = 1
         viewmodel.output.reservation.bind(to: label.rx.text).disposed(by: disposbag)
+        return label
+    }()
+    
+    lazy var priceLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(hexString: "#FA5d5C")
+        label.font = .systemFont(ofSize: 12, weight: .regular)
+        label.textAlignment = .left
+        label.numberOfLines = 1
+        viewmodel.output.price.bind(to: label.rx.text).disposed(by: disposbag)
+        label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
     

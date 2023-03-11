@@ -17,6 +17,7 @@ final class HomeCellViewModel: ViewModelProjectType
         let reservation: Observable<String>
         let avatar: Observable<UIImage>
         let nickName: Observable<String>
+        let price: Observable<String>
     }
     let input: Input
     let output: Output
@@ -60,7 +61,32 @@ final class HomeCellViewModel: ViewModelProjectType
         let nickNameParameter = activitySubject.asObservable().map { activity in
             activity.creator.nickname
         }
-        output = Output(posterImage: posterParameter, title: titleParameter, reservation: reservationParameter, avatar: avatarParameter, nickName: nickNameParameter)
+        
+        let priceParameter = activitySubject.asObservable().map { activity in
+            var price = ""
+            if activity.price == 0
+            {
+                price.append("免费")
+            }
+            else
+            {
+                if fmodf(activity.price, 1) == 0
+                {
+                    return String(format: "%.0f", activity.price)
+                }
+                else if fmodf(activity.price * 10, 1) == 0
+                {
+                    return String(format: "%.1f", activity.price)
+                }
+                else
+                {
+                    return String(format: "%.2f", activity.price)
+                }
+            }
+            return price
+        }
+        
+        output = Output(posterImage: posterParameter, title: titleParameter, reservation: reservationParameter, avatar: avatarParameter, nickName: nickNameParameter,price: priceParameter)
     }
     
 }

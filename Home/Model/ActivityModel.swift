@@ -14,5 +14,5 @@ class ActivityModel: BaseModel {
     var title = ""
     /// 课程预订人数
     var reservation_count = 0
-    
+    var price: Float = 0.0
 }
