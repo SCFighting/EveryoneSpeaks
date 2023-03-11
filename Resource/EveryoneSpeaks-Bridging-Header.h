@@ -10,5 +10,7 @@
 
 #import "WXApi.h"
 #import "RTRootNavigationController.h"
+#import "TXLiteAVSDK_Professional/TXLiteAVSDK.h"
+#import "SuperPlayer.h"
 
 #endif /* EveryoneSpeaks_Bridging_Header_h */

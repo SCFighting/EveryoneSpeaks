@@ -17,6 +17,8 @@ target 'EveryoneSpeaks' do
   pod 'CodeTextField', '~> 0.4.0'
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'SDWebImage', '~> 5.0'
+  pod 'TXLiteAVSDK_Professional', :podspec => 'https://liteav.sdk.qcloud.com/pod/liteavsdkspec/TXLiteAVSDK_Professional.podspec'
+  pod 'SuperPlayer/Professional'
   pod 'ActiveLabel'
   pod 'RAMAnimatedTabBarController'
   pod 'RTRootNavigationController'

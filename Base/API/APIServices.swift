@@ -26,6 +26,10 @@ enum Service {
     /// 频道下推荐的课程
     case recommentActivityForChannel(channel_id: Int, parameters: [String:Any]?)
     
+    //MARK: -- 播放相关
+    ///课程播放信息
+    case activityWatchInfo(activity_id: Int)
+    
 }
 
 extension Service: TargetType
@@ -37,7 +41,6 @@ extension Service: TargetType
             return URL(string: "https://api.weixin.qq.com")!
         default:
             return URL(string: "https://api.renrenjiang.cn")!
-            break
         }
     }
     
@@ -49,7 +52,7 @@ extension Service: TargetType
         case .wechatUserInfo(accessToken: _ , openid: _ ):
             return "/sns/userinfo"
         case .authLogin(app: _, nickname: _, uuid: _, openid: _, accessToken: _ ):
-            return "/api/v3/account/apple/auth"
+            return "/api/v3/account/sys/auth"
             
         case .systemSwitchConfig(include: _):
             return "/api/v3/system/switch"
@@ -58,6 +61,8 @@ extension Service: TargetType
             return "/api/v3/channels/list"
         case let .recommentActivityForChannel(channel_id, _):
             return "/api/v3/channels/\(channel_id)/activities"
+        case .activityWatchInfo(_):
+            return "/adm/activity/info"
         }
     }
     
@@ -65,10 +70,11 @@ extension Service: TargetType
         switch self
         {
         case .wechatAccessToken(_, _ , _ , _),
-            .wechatUserInfo(accessToken: _ , openid: _ ),
-            .systemSwitchConfig(include: _),
-            .channelClassification,
-            .recommentActivityForChannel(channel_id: _, parameters: _):
+                .wechatUserInfo(accessToken: _ , openid: _ ),
+                .systemSwitchConfig(include: _),
+                .channelClassification,
+                .recommentActivityForChannel(channel_id: _, parameters: _),
+                .activityWatchInfo(activity_id: _):
             return .get
         case .authLogin(app: _, nickname: _, uuid: _, openid: _, accessToken: _):
             return .post
@@ -113,11 +119,24 @@ extension Service: TargetType
             return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
         case let .recommentActivityForChannel(_, parameters):
             return .requestParameters(parameters: parameters ?? [:], encoding: URLEncoding.queryString)
+        case let .activityWatchInfo(activity_id):
+            return .requestParameters(parameters: ["activity_id":activity_id,"u":UserInfoConstantConfig.currentUserID], encoding: URLEncoding.queryString)
         }
     }
     
     var headers: [String : String]? {
-        return ["Content-type": "application/json"]
+        var headers:Dictionary<String,String> = [:]
+        
+        //内容的类型
+        headers["Content-Type"]="application/json"
+        
+        //判断是否登录了
+        if let Authorization = UserInfoConstantConfig.Authorization
+        {
+            //将token设置到请求头
+            headers["Authorization"] = Authorization
+        }
+        return headers
     }
 }
 
@@ -125,7 +144,7 @@ private extension String {
     var urlEscaped: String {
         addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
     }
-
+    
     var utf8Encoded: Data {
         Data(self.utf8)
     }

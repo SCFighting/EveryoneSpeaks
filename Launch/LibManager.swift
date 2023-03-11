@@ -111,6 +111,7 @@ class LibManager: NSObject {
         DispatchQueue.main.async { [self] in
             /// 初始化微信SDK
             initWechatSDK()
+            initLiteAVSDK()
         }
     }
     
@@ -133,6 +134,11 @@ class LibManager: NSObject {
 //        }
     }
     
+    /// 初始化腾讯云SDK
+    private func initLiteAVSDK()
+    {
+        TXLiveBase.setLicenceURL(AuthorConstConfig.licenceURL, key: AuthorConstConfig.licenceKey)
+    }
     
     
     private override init() {}

@@ -85,6 +85,10 @@ struct UserInfoConstantConfig {
     {
         UserDefaults.standard.integer(forKey: "user_id")
     }
+    /// 授权串
+    static var Authorization: String? {
+        UserDefaults.standard.string(forKey: UserInfoConstantConfig.token)
+    }
 }
 
 /// App常量信息
@@ -104,4 +108,9 @@ struct AuthorConstConfig
     static let wxsecret = "13d141773bab3ad7d74fc5fc5e764283"
     ///  微信开发者Universal Link
     static let wxUniversalLink = "https://apple.renrenjiang.cn/"
+    
+    /// 腾讯sdk licenceURL
+    static let licenceURL = "http://license.vod2.myqcloud.com/license/v1/d0698495c5236d29fbc812ebf466cf6e/TXLiveSDK.licence"
+    /// 腾讯SDK key
+    static let licenceKey = "cf04240c93a2717f855b1d632f3022a7"
 }
