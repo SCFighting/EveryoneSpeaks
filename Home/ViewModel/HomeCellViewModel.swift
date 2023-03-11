@@ -72,15 +72,15 @@ final class HomeCellViewModel: ViewModelProjectType
             {
                 if fmodf(activity.price, 1) == 0
                 {
-                    return String(format: "%.0f", activity.price)
+                    return String(format: "¥%.0f", activity.price)
                 }
                 else if fmodf(activity.price * 10, 1) == 0
                 {
-                    return String(format: "%.1f", activity.price)
+                    return String(format: "¥%.1f", activity.price)
                 }
                 else
                 {
-                    return String(format: "%.2f", activity.price)
+                    return String(format: "¥%.2f", activity.price)
                 }
             }
             return price
