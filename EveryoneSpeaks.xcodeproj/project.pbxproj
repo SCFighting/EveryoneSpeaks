@@ -31,7 +31,9 @@
 		52713F632992472400BA8D11 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52713F622992472400BA8D11 /* BaseController.swift */; };
 		52713F662992489800BA8D11 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52713F652992489800BA8D11 /* LoginController.swift */; };
 		5275162429BC178B00341856 /* HomeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275162329BC178B00341856 /* HomeCellViewModel.swift */; };
+		5275162629BC8CC500341856 /* WatchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275162529BC8CC500341856 /* WatchController.swift */; };
 		5282EE87299B5903005710F2 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282EE86299B5903005710F2 /* APIServices.swift */; };
+		5299F31129BEBC8A00C41D9E /* VideoInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299F31029BEBC8A00C41D9E /* VideoInfoModel.swift */; };
 		52BD302D29B82B4A0002DB8F /* PresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD302C29B82B4A0002DB8F /* PresentAnimator.swift */; };
 		52BD302F29B82CA60002DB8F /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD302E29B82CA60002DB8F /* PresentationController.swift */; };
 		52BD303329B86D450002DB8F /* PresentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD303229B86D450002DB8F /* PresentController.swift */; };
@@ -78,7 +80,9 @@
 		52713F622992472400BA8D11 /* BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
 		52713F652992489800BA8D11 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		5275162329BC178B00341856 /* HomeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellViewModel.swift; sourceTree = "<group>"; };
+		5275162529BC8CC500341856 /* WatchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchController.swift; sourceTree = "<group>"; };
 		5282EE86299B5903005710F2 /* APIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
+		5299F31029BEBC8A00C41D9E /* VideoInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoInfoModel.swift; sourceTree = "<group>"; };
 		52BD302C29B82B4A0002DB8F /* PresentAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAnimator.swift; sourceTree = "<group>"; };
 		52BD302E29B82CA60002DB8F /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		52BD303229B86D450002DB8F /* PresentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentController.swift; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 		52713F242990DB7000BA8D11 = {
 			isa = PBXGroup;
 			children = (
+				5299F30D29BEBC7100C41D9E /* Watch */,
 				52713F582991F26600BA8D11 /* AppConfig */,
 				52713F5D2992470900BA8D11 /* Base */,
 				524DE4BA29A4CCF3008D1A8A /* EveryoneSpeaks.entitlements */,
@@ -322,6 +327,30 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		5299F30D29BEBC7100C41D9E /* Watch */ = {
+			isa = PBXGroup;
+			children = (
+				5299F30E29BEBC7100C41D9E /* Controller */,
+				5299F30F29BEBC7100C41D9E /* Model */,
+			);
+			path = Watch;
+			sourceTree = "<group>";
+		};
+		5299F30E29BEBC7100C41D9E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5299F30F29BEBC7100C41D9E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5299F31029BEBC8A00C41D9E /* VideoInfoModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		52BD302B29B82B010002DB8F /* Animation */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +387,7 @@
 			children = (
 				52BD303729B898470002DB8F /* HomeController.swift */,
 				52BD304129B9DAD50002DB8F /* HomeSubController.swift */,
+				5275162529BC8CC500341856 /* WatchController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -535,6 +565,7 @@
 				52BD302F29B82CA60002DB8F /* PresentationController.swift in Sources */,
 				52713F662992489800BA8D11 /* LoginController.swift in Sources */,
 				524DE4E529ADE1D2008D1A8A /* PrivacyViewModel.swift in Sources */,
+				5275162629BC8CC500341856 /* WatchController.swift in Sources */,
 				5275162429BC178B00341856 /* HomeCellViewModel.swift in Sources */,
 				52BD303B29B898940002DB8F /* ChannelClassificationModel.swift in Sources */,
 				524DE4D229A86579008D1A8A /* BaseExtension.swift in Sources */,
@@ -558,6 +589,7 @@
 				52BD304429BAD6A10002DB8F /* HomeCell.swift in Sources */,
 				524DE4C629A5B952008D1A8A /* WechatAccessModel.swift in Sources */,
 				524DE4E129ADA73C008D1A8A /* CommenLib.swift in Sources */,
+				5299F31129BEBC8A00C41D9E /* VideoInfoModel.swift in Sources */,
 				52713F522990DDF600BA8D11 /* SceneDelegate.swift in Sources */,
 				524DE4EB29AE2361008D1A8A /* MineController.swift in Sources */,
 				5282EE87299B5903005710F2 /* APIServices.swift in Sources */,

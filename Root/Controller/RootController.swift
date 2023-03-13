@@ -24,7 +24,6 @@ class RootController: RAMAnimatedTabBarController {
         } else {
             // Fallback on earlier versions
         }
-        
 //        self.tabBar.backgroundImage =
     }
     
