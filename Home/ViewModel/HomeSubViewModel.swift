@@ -26,7 +26,7 @@ final class HomeSubViewModel:ViewModelProjectType
     init() {
         self.input = Input(viewDidload: viewDidloadSubject.asObserver())
         let result = viewDidloadSubject.asObservable().flatMapLatest({channel_id ->Observable<[ActivityModel]> in
-            return Self.provider.rx.request(.recommentActivityForChannel(channel_id: channel_id, parameters: ["type":"all"])).map({response -> Response in
+            return Self.provider.rx.request(.recommentActivityForChannel(channel_id: channel_id, parameters: ["type":"all","pageSize":10000])).map({response -> Response in
                 if let json = try? response.mapJSON() as? Dictionary<String,Any>,json.keys.contains("activities"),
                    let data = try? JSONSerialization.data(withJSONObject: json["activities"]!)
                 {
