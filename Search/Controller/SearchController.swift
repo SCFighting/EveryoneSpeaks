@@ -80,7 +80,6 @@ extension SearchController: UISearchBarDelegate
         }
         else
         {
-            searchVC.dismiss(animated: true)
             self.rt_navigationController.popViewController(animated: true, complete: nil)
         }
     }

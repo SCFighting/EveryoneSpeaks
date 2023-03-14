@@ -144,6 +144,7 @@ class LibManager: NSObject {
     private func initIQkeyboardManager()
     {
         IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     }
     
     

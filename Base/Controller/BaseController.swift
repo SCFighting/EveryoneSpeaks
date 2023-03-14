@@ -17,6 +17,9 @@ class BaseController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        DDLogDebug("\(Self.self) deinit")
+    }
     /*
     // MARK: - Navigation
 
