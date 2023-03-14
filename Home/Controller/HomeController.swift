@@ -58,6 +58,8 @@ class HomeController: BaseController {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = (segmentedView.selectedIndex == 0)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "人人讲", style: .plain, target: nil, action: nil)
         self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:UIColor.red,NSAttributedString.Key.font:UIFont.systemFont(ofSize: 25, weight: .medium)], for: .normal)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "searchMore")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(searchClick))
+//        self.navigationItem.ri
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -113,6 +115,12 @@ class HomeController: BaseController {
         
         
         //        viewmodel.input.chan
+    }
+    
+    @objc func searchClick()
+    {
+        let vc = SearchController()
+        self.rt_navigationController.pushViewController(vc, animated: true)
     }
     
 }

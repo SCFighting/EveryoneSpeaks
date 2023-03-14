@@ -1,22 +1,21 @@
 //
-//  BaseController.swift
+//  SearchResultController.swift
 //  EveryoneSpeaks
 //
-//  Created by 孙超 on 2023/2/7.
+//  Created by SC on 2023/3/14.
 //
 
 import UIKit
-class BaseController: UIViewController {
-    
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        self.view.backgroundColor = .white
+
+class SearchResultController: BaseController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     /*
     // MARK: - Navigation
 

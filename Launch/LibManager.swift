@@ -112,6 +112,7 @@ class LibManager: NSObject {
             /// 初始化微信SDK
             initWechatSDK()
             initLiteAVSDK()
+            initIQkeyboardManager()
         }
     }
     
@@ -138,6 +139,11 @@ class LibManager: NSObject {
     private func initLiteAVSDK()
     {
         TXLiveBase.setLicenceURL(AuthorConstConfig.licenceURL, key: AuthorConstConfig.licenceKey)
+    }
+    
+    private func initIQkeyboardManager()
+    {
+        IQKeyboardManager.shared.enable = true
     }
     
     

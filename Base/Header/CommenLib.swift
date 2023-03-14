@@ -19,3 +19,4 @@ import Foundation
 @_exported import CocoaLumberjack
 @_exported import SnapKit
 @_exported import SDWebImage
+@_exported import IQKeyboardManagerSwift

@@ -31,10 +31,12 @@
 		52713F632992472400BA8D11 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52713F622992472400BA8D11 /* BaseController.swift */; };
 		52713F662992489800BA8D11 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52713F652992489800BA8D11 /* LoginController.swift */; };
 		5275162429BC178B00341856 /* HomeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275162329BC178B00341856 /* HomeCellViewModel.swift */; };
-		5275162629BC8CC500341856 /* WatchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5275162529BC8CC500341856 /* WatchController.swift */; };
 		5282EE87299B5903005710F2 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5282EE86299B5903005710F2 /* APIServices.swift */; };
 		5299F31129BEBC8A00C41D9E /* VideoInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299F31029BEBC8A00C41D9E /* VideoInfoModel.swift */; };
 		5299F31329C024D400C41D9E /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299F31229C024D400C41D9E /* NavigationController.swift */; };
+		5299F31529C0544600C41D9E /* WatchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299F31429C0544600C41D9E /* WatchController.swift */; };
+		5299F31A29C054DF00C41D9E /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299F31929C054DF00C41D9E /* SearchController.swift */; };
+		5299F31C29C0561B00C41D9E /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299F31B29C0561B00C41D9E /* SearchResultController.swift */; };
 		52BD302D29B82B4A0002DB8F /* PresentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD302C29B82B4A0002DB8F /* PresentAnimator.swift */; };
 		52BD302F29B82CA60002DB8F /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD302E29B82CA60002DB8F /* PresentationController.swift */; };
 		52BD303329B86D450002DB8F /* PresentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BD303229B86D450002DB8F /* PresentController.swift */; };
@@ -81,10 +83,13 @@
 		52713F622992472400BA8D11 /* BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
 		52713F652992489800BA8D11 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		5275162329BC178B00341856 /* HomeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellViewModel.swift; sourceTree = "<group>"; };
-		5275162529BC8CC500341856 /* WatchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchController.swift; sourceTree = "<group>"; };
 		5282EE86299B5903005710F2 /* APIServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
 		5299F31029BEBC8A00C41D9E /* VideoInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoInfoModel.swift; sourceTree = "<group>"; };
 		5299F31229C024D400C41D9E /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		5299F31429C0544600C41D9E /* WatchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchController.swift; sourceTree = "<group>"; };
+		5299F31929C054DF00C41D9E /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		5299F31B29C0561B00C41D9E /* SearchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
+		5299F31D29C0615100C41D9E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		52BD302C29B82B4A0002DB8F /* PresentAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentAnimator.swift; sourceTree = "<group>"; };
 		52BD302E29B82CA60002DB8F /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		52BD303229B86D450002DB8F /* PresentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentController.swift; sourceTree = "<group>"; };
@@ -209,7 +214,6 @@
 		52713F242990DB7000BA8D11 = {
 			isa = PBXGroup;
 			children = (
-				5299F30D29BEBC7100C41D9E /* Watch */,
 				52713F582991F26600BA8D11 /* AppConfig */,
 				52713F5D2992470900BA8D11 /* Base */,
 				524DE4BA29A4CCF3008D1A8A /* EveryoneSpeaks.entitlements */,
@@ -222,6 +226,8 @@
 				52713F2E2990DB7000BA8D11 /* Products */,
 				52713F472990DDF600BA8D11 /* Resource */,
 				52713F4E2990DDF600BA8D11 /* Root */,
+				5299F31629C054B400C41D9E /* Search */,
+				5299F30D29BEBC7100C41D9E /* Watch */,
 			);
 			sourceTree = "<group>";
 		};
@@ -342,6 +348,7 @@
 		5299F30E29BEBC7100C41D9E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5299F31429C0544600C41D9E /* WatchController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -352,6 +359,31 @@
 				5299F31029BEBC8A00C41D9E /* VideoInfoModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		5299F31629C054B400C41D9E /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				5299F31729C054B400C41D9E /* ViewModel */,
+				5299F31829C054B400C41D9E /* Controller */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		5299F31729C054B400C41D9E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5299F31829C054B400C41D9E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5299F31929C054DF00C41D9E /* SearchController.swift */,
+				5299F31B29C0561B00C41D9E /* SearchResultController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		52BD302B29B82B010002DB8F /* Animation */ = {
@@ -390,7 +422,6 @@
 			children = (
 				52BD303729B898470002DB8F /* HomeController.swift */,
 				52BD304129B9DAD50002DB8F /* HomeSubController.swift */,
-				5275162529BC8CC500341856 /* WatchController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -474,6 +505,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 52713F242990DB7000BA8D11;
 			productRefGroup = 52713F2E2990DB7000BA8D11 /* Products */;
@@ -568,7 +600,6 @@
 				52BD302F29B82CA60002DB8F /* PresentationController.swift in Sources */,
 				52713F662992489800BA8D11 /* LoginController.swift in Sources */,
 				524DE4E529ADE1D2008D1A8A /* PrivacyViewModel.swift in Sources */,
-				5275162629BC8CC500341856 /* WatchController.swift in Sources */,
 				5275162429BC178B00341856 /* HomeCellViewModel.swift in Sources */,
 				52BD303B29B898940002DB8F /* ChannelClassificationModel.swift in Sources */,
 				524DE4D229A86579008D1A8A /* BaseExtension.swift in Sources */,
@@ -578,6 +609,7 @@
 				524DE4BC29A4E70F008D1A8A /* LibManager.swift in Sources */,
 				52713F632992472400BA8D11 /* BaseController.swift in Sources */,
 				524DE4CF29A85F72008D1A8A /* CustomerError.swift in Sources */,
+				5299F31A29C054DF00C41D9E /* SearchController.swift in Sources */,
 				52BD303E29B89A880002DB8F /* HomeViewModel.swift in Sources */,
 				52BD302D29B82B4A0002DB8F /* PresentAnimator.swift in Sources */,
 				524DE4E729AE1AD2008D1A8A /* MainLoginView.swift in Sources */,
@@ -585,8 +617,10 @@
 				524DE4F229B1C1D0008D1A8A /* NetworkMonitor.swift in Sources */,
 				52E4F1052993812F00A8FE32 /* LoginViewModel.swift in Sources */,
 				524DE4CB29A85EA7008D1A8A /* BaseModel.swift in Sources */,
+				5299F31C29C0561B00C41D9E /* SearchResultController.swift in Sources */,
 				524DE4D629AC84B3008D1A8A /* UserInfoModel.swift in Sources */,
 				52E4F1022993803700A8FE32 /* ViewModelProtocol.swift in Sources */,
+				5299F31529C0544600C41D9E /* WatchController.swift in Sources */,
 				52BD304629BAFCC60002DB8F /* HomeSubViewModel.swift in Sources */,
 				52713F512990DDF600BA8D11 /* AppDelegate.swift in Sources */,
 				52BD304429BAD6A10002DB8F /* HomeCell.swift in Sources */,
@@ -609,6 +643,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				52713F4A2990DDF600BA8D11 /* Base */,
+				5299F31D29C0615100C41D9E /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -620,6 +655,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -680,6 +716,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

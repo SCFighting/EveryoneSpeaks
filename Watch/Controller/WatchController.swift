@@ -28,6 +28,7 @@ class WatchController: BaseController {
         view.autoPlay = true
         /// 控制层view
         let controView = SPDefaultControlView()
+        controView.backBtn.isHidden = true
         view.controlView = controView
         view.delegate = self
         return view
@@ -39,9 +40,7 @@ class WatchController: BaseController {
     
     @objc func closeVideo()
     {
-        playerView.pause()
-        playerView.removeVideo()
-        playerView = nil
+        playerView.resetPlayer()
         self.rt_navigationController.popViewController(animated: true, complete: nil)
     }
 }
@@ -49,7 +48,7 @@ class WatchController: BaseController {
 extension WatchController: SuperPlayerDelegate
 {
     func superPlayerBackAction(_ player: SuperPlayerView!) {
-        player.pause()
         player.resetPlayer()
+        self.rt_navigationController.popViewController(animated: true, complete: nil)
     }
 }
