@@ -39,7 +39,7 @@ class RootController: RAMAnimatedTabBarController {
     private func addOneChildVC(childVC: UIViewController, title: String?, image: UIImage?, selecteImage: UIImage?) {
         
         //1.添加子控制器
-        let nav = RTRootNavigationController(rootViewController: childVC)
+        let nav = NavigationController(rootViewController: childVC)
         addChild(nav)
         //2.添加标题
         let item = RAMAnimatedTabBarItem(title: title, image: image, selectedImage: selecteImage)

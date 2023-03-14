@@ -28,7 +28,6 @@ class HomeSubController: BaseController {
                 {
                     let videoInfo = videoJson.kj.model(VideoInfoModel.self)
                     let vc = WatchController()
-                    vc.hidesBottomBarWhenPushed = true
                     if videoInfo.status == 0
                     {
                         DDLogDebug(TXLiveBase.getLicenceInfo())

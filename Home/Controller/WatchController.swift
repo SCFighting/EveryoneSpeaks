@@ -9,34 +9,47 @@ import UIKit
 
 class WatchController: BaseController {
 
-    let playerView = SuperPlayerView()
     let model = SuperPlayerModel()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        playerView.layoutStyle = .fullScreen
-        playerView.play(withModelNeedLicence: model)
-
-       
         playerView.fatherView = self.view
-        // Do any additional setup after loading the view.
+        playerView.play(withModelNeedLicence: model)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    lazy var playerView: SuperPlayerView! = {
+        let view = SuperPlayerView()
+        /// 精简布局模式
+        view.layoutStyle = .compact
+        /// 默认非全屏
+        view.isFullScreen = false
+        ///锁定旋转
+        view.isLockScreen = true
+        /// 自动播放
+        view.autoPlay = true
+        /// 控制层view
+        let controView = SPDefaultControlView()
+        view.controlView = controView
+        view.delegate = self
+        return view
+    }()
+    
+    override func customBackItem(withTarget target: Any!, action: Selector!) -> UIBarButtonItem! {
+        UIBarButtonItem(title: "关闭", style: .plain, target: self, action: #selector(closeVideo))
     }
-    */
-
+    
+    @objc func closeVideo()
+    {
+        playerView.pause()
+        playerView.removeVideo()
+        playerView = nil
+        self.rt_navigationController.popViewController(animated: true, complete: nil)
+    }
 }
 
 extension WatchController: SuperPlayerDelegate
 {
-    func superPlayerError(_ player: SuperPlayerView!, errCode code: Int32, errMessage why: String!) {
-        DDLogDebug(why)
+    func superPlayerBackAction(_ player: SuperPlayerView!) {
+        player.pause()
+        player.resetPlayer()
     }
 }
